@@ -1,7 +1,7 @@
 #!/bin/bash
 
-speakers_sink="sink-55"
-headphones_sink="sink-52"
+speakers_name="Built-in Audio Analog Surround 2.1"
+headphones_name="G733 Gaming Headset Analog Stereo"
 speakers_icon="🔈"
 headphones_icon="🎧"
 mute_color="red"
@@ -29,10 +29,10 @@ if ! $valid_argument; then
 fi
 
 if [ "$1" = "speakers" ]; then
-    sink=$speakers_sink
+    sink=$(pulsemixer --list-sinks|grep "$speakers_name"|cut --delimiter "," --fields 1|cut --delimiter " " --fields 3)
     icon=$speakers_icon
 else
-    sink=$headphones_sink
+    sink=$(pulsemixer --list-sinks|grep "$headphones_name"|cut --delimiter "," --fields 1|cut --delimiter " " --fields 3)
     icon=$headphones_icon
 fi
 

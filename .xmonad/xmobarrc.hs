@@ -30,11 +30,11 @@ Config {
                                       , "--low", "lightcyan"
                                       , "--normal", "cyan"
                                       , "--high", "red"] 20
-                      -- , Run Volume "default" "Master" ["--template", "<volume> <status>"] 10 TODO reemplazar con pulsemixer get, hacer un script perzoalizado y correr con COM
-                      -- , Run Volume "sink-53" "PCM" ["--template", "<volume> <status>"] 10
                       , Run Network "eno1" [  "--template", "<fn=1>⬇</fn><fc=cyan><rx></fc><fn=1>⬆</fn><fc=cyan><tx></fc>"
                                             , "--suffix", "True"
                                             , "--width", "7"] 20
+                      , Run Com "/home/zink/.xmonad/scripts/get-volume.sh" ["speakers"] "speakers" 10
+                      , Run Com "/home/zink/.xmonad/scripts/get-volume.sh" ["headphones"] "headphones" 10
                       , Run Uptime    [ "--template", "<fn=1>😄</fn><fc=cyan><days></fc>d<fc=cyan><hours></fc>h<fc=cyan><minutes></fc>m<fc=cyan><seconds></fc>s"
                                       , "--suffix", "False"
                                       , "--minwidth", "2"] 10
@@ -43,5 +43,5 @@ Config {
                     ]
          , sepChar = "%"
          , alignSep = "}{"
-         , template = "%XMonadLog% }{ %locks% %disku% %multicpu% %coretemp% %memory% %eno1% %uptime% %date% <fn=1>🖖</fn>"
+         , template = "%XMonadLog% }{ %locks% %disku% %multicpu% %coretemp% %memory% %eno1% %speakers% %headphones% %uptime% %date% <fn=1>🖖</fn>"
          }

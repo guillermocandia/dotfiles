@@ -12,6 +12,7 @@ import XMonad.Util.Ungrab
 
 import XMonad.Layout.Magnifier
 import XMonad.Layout.ThreeColumns
+import XMonad.Layout.NoBorders
 
 import XMonad.Hooks.EwmhDesktops
 
@@ -31,11 +32,12 @@ myConfig = def
     { modMask    = mod4Mask
     , layoutHook = myLayout
     , workspaces = myWorkspaces
+    , focusedBorderColor  = "cyan"
     }
   `additionalKeysP` myKeys
 
 myKeys =
-    [ ("M-S-<Return>", spawn "xterm -class UXTerm -u8 -xrm '*allowSendEvents:true'")
+    [ ("M-S-<Return>", spawn "xterm -class UXTerm -u8 -xrm '*allowSendEvents:true' -bc -bcf 400 -bcn 400 -cr cyan")
     , ("<Print>", spawn "$HOME/bin/foto")
     , ("<XF86AudioRaiseVolume>", spawn "$HOME/.xmonad/scripts/set-volume.sh speakers +5")
     , ("<XF86AudioLowerVolume>", spawn "$HOME/.xmonad/scripts/set-volume.sh speakers -5")
@@ -55,7 +57,7 @@ myKeys =
                                      , ("S-", windows . W.shift)]
     ]
 
-myLayout = tiled ||| Mirror tiled ||| Full ||| threeCol
+myLayout = avoidStruts . noBorders $ tiled ||| Mirror tiled ||| Full ||| threeCol
   where
     threeCol = magnifiercz' 1.3 $ ThreeColMid nmaster delta ratio
     tiled    = Tall nmaster delta ratio

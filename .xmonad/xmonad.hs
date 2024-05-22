@@ -37,7 +37,7 @@ myConfig = def
   `additionalKeysP` myKeys
 
 myKeys =
-    [ ("M-S-<Return>", spawn "xterm -class UXTerm -u8 -xrm '*allowSendEvents:true' -bc -bcf 400 -bcn 400 -cr cyan")
+    [ ("M-S-<Return>", spawn "$HOME/.cargo/bin/alacritty")
     , ("<Print>", spawn "$HOME/bin/foto")
     , ("<XF86AudioRaiseVolume>", spawn "$HOME/.xmonad/scripts/set-volume.sh speakers +5")
     , ("<XF86AudioLowerVolume>", spawn "$HOME/.xmonad/scripts/set-volume.sh speakers -5")

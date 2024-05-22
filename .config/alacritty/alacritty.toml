@@ -1,0 +1,10 @@
+live_config_reload = true
+import = ["~/.config/alacritty/xterm.toml"]
+
+[window]
+title = "x"
+decorations = "None"
+
+[font]
+normal = { family = "JetBrainsMono Nerd Font Mono", style = "Regular" }
+size = 9

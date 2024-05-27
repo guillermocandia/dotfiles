@@ -12,7 +12,7 @@ return {
 			vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
 			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help_tags" })
 			vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "Telescope commands" })
-			vim.keymap.set("n", "<leader>fb", builtin.builtin, { desc = "Telescope builtin" })
+			vim.keymap.set("n", "<leader>fu", builtin.builtin, { desc = "Telescope builtin" })
 			vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Telescope keymaps" })
 			vim.keymap.set("n", "<leader>fr", builtin.registers, { desc = "Telescope registers" })
 		end,
@@ -33,29 +33,6 @@ return {
 	{
 		"ghassan0/telescope-glyph.nvim",
 		config = function()
-			-- require("telescope").setup({
-			-- 	extensions = {
-			-- 		glyph = {
-			-- 			action = function(glyph)
-			-- 				-- argument glyph is a table.
-			-- 				-- {name="", value="", category="", description=""}
-			--
-			-- 				vim.fn.setreg("*", glyph.value)
-			-- 				print([[Press p or "*p to paste this glyph]] .. glyph.value)
-			--
-			-- 				-- insert glyph when picked
-			-- 				-- vim.api.nvim_put({ glyph.value }, 'c', false, true)
-			-- 			end,
-			-- 		},
-			-- 	},
-			-- })
-			-- require("telescope").setup({
-			--     extensions = {
-			--         ["ui-select"] = {
-			--             require("telescope.themes").get_dropdown({}),
-			--         },
-			--     },
-			-- })
 			require("telescope").load_extension("glyph")
 		end,
 	},

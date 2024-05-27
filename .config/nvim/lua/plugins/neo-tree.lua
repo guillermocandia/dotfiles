@@ -17,6 +17,9 @@ return {
                 "git_status",
                 "document_symbols",
             },
+            filesystem = {
+                use_libuv_file_watcher = true,
+            },
         })
         vim.keymap.set({ "n", "v" }, "<C-n>", ":Neotree filesystem left toggle <cr>", { desc = "Neotree" })
     end,

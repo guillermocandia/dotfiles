@@ -2,6 +2,7 @@
 !.gitignore
 !/.xmonad/
 /.xmonad/*
+!/.xmonad/.editorconfig
 !/.xmonad/*.hs
 !/.xmonad/scripts/
 !/.config/

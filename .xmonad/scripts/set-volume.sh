@@ -12,8 +12,8 @@ if [ $# -ne 2 ]; then
 fi
 
 if [[ ! " ${valid_devices[@]} " =~ " $1 " ]]; then
-  echo "Error: Invalid device. Device must be one of the following: ${valid_devices[@]}"
-  exit 1
+    echo "Error: Invalid device. Device must be one of the following: ${valid_devices[@]}"
+    exit 1
 fi
 
 if ! [[ "$2" =~ ^[-+]?[0-9]+$ ]]; then
@@ -22,9 +22,9 @@ if ! [[ "$2" =~ ^[-+]?[0-9]+$ ]]; then
 fi
 
 if [ "$1" = "speakers" ]; then
-    sink=$(pulsemixer --list-sinks|grep "$speakers_name"|cut --delimiter "," --fields 1|cut --delimiter " " --fields 3)
+    sink=$(pulsemixer --list-sinks | grep "$speakers_name" | cut --delimiter "," --fields 1 | cut --delimiter " " --fields 3)
 else
-    sink=$(pulsemixer --list-sinks|grep "$headphones_name"|cut --delimiter "," --fields 1|cut --delimiter " " --fields 3)
+    sink=$(pulsemixer --list-sinks | grep "$headphones_name" | cut --delimiter "," --fields 1 | cut --delimiter " " --fields 3)
 fi
 
 pulsemixer --id "$sink" --change-volume "$2"

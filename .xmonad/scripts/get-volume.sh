@@ -29,10 +29,10 @@ if ! $valid_argument; then
 fi
 
 if [ "$1" = "speakers" ]; then
-    sink=$(pulsemixer --list-sinks|grep "$speakers_name"|cut --delimiter "," --fields 1|cut --delimiter " " --fields 3)
+    sink=$(pulsemixer --list-sinks | grep "$speakers_name" | cut --delimiter "," --fields 1 | cut --delimiter " " --fields 3)
     icon=$speakers_icon
 else
-    sink=$(pulsemixer --list-sinks|grep "$headphones_name"|cut --delimiter "," --fields 1|cut --delimiter " " --fields 3)
+    sink=$(pulsemixer --list-sinks | grep "$headphones_name" | cut --delimiter "," --fields 1 | cut --delimiter " " --fields 3)
     icon=$headphones_icon
 fi
 

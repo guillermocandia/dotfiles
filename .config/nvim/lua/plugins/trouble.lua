@@ -26,5 +26,8 @@ return {
     vim.keymap.set("n", "gR", function()
       require("trouble").toggle("lsp_references")
     end, { desc = "Trouble lsp_references" })
+    vim.keymap.set("n", "<leader>xs", function()
+      require("trouble").toggle("symbols")
+    end, { desc = "Trouble symbols" })
   end,
 }

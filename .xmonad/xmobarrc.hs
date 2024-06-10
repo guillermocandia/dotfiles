@@ -33,6 +33,7 @@ Config {
                       , Run Network "eno1" [  "--template", "<fn=1>⬇</fn><fc=cyan><rx></fc><fn=1>⬆</fn><fc=cyan><tx></fc>"
                                             , "--suffix", "True"
                                             , "--width", "7"] 20
+                      , Run Com "/home/zink/.xmonad/scripts/get-gpu.sh" [] "gpu" 10
                       , Run Com "/home/zink/.xmonad/scripts/get-upgradeable.sh" [] "upgradeable" 100
                       , Run Com "/home/zink/.xmonad/scripts/get-volume.sh" ["speakers"] "speakers" 10
                       , Run Com "/home/zink/.xmonad/scripts/get-volume.sh" ["headphones"] "headphones" 10
@@ -44,5 +45,5 @@ Config {
                     ]
          , sepChar = "%"
          , alignSep = "}{"
-         , template = "%XMonadLog% }{ %locks% %disku% %multicpu% %coretemp% %memory% %eno1% %upgradeable% %speakers% %headphones% %uptime% %date% <fn=1>🖖</fn>"
+         , template = "%XMonadLog% }{ %locks% %disku% %multicpu% %coretemp% %memory% %eno1% %gpu% %upgradeable% %speakers% %headphones% %uptime% %date% <fn=1>🖖</fn>"
          }

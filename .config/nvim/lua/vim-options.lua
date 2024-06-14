@@ -7,7 +7,11 @@ vim.cmd("set shiftwidth=2")
 vim.g.mapleader = ","
 
 vim.diagnostic.config({
-  virtual_text = true,
+  virtual_text = {
+    virt_text_pos = "right_align",
+    source = true,
+  },
   underline = false,
   update_in_insert = true,
+  signs = true,
 })

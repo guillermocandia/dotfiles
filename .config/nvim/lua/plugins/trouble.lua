@@ -14,9 +14,9 @@ return {
     vim.keymap.set("n", "<leader>xw", function()
       require("trouble").toggle("workspace_diagnostics")
     end, { desc = "Trouble workspace" })
-    vim.keymap.set("n", "<leader>xd", function()
-      require("trouble").toggle("document_diagnostics")
-    end, { desc = "Trouble document" })
+    -- vim.keymap.set("n", "<leader>xd", function()
+    --   require("trouble").toggle("document_diagnostics")
+    -- end, { desc = "Trouble document" })
     vim.keymap.set("n", "<leader>xq", function()
       require("trouble").toggle("quickfix")
     end, { desc = "Trouble quickfix" })
@@ -29,5 +29,8 @@ return {
     vim.keymap.set("n", "<leader>xs", function()
       require("trouble").toggle("symbols")
     end, { desc = "Trouble symbols" })
+    vim.keymap.set({ "n", "v", "i" }, "<C-d>", function()
+      require("trouble").toggle("diagnostics")
+    end, { desc = "Trouble diagnostics" })
   end,
 }

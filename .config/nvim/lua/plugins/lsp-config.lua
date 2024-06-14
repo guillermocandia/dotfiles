@@ -14,6 +14,8 @@ return {
       local servers = {
         "bashls", -- bash
         -- "jedi_language_server", -- python
+        -- "pyright", -- python
+        "pylsp", -- python
       }
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local lspconfig = require("lspconfig")

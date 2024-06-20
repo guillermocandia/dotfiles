@@ -6,6 +6,6 @@ return {
       input_after_comment = false,
       snippet_engine = "luasnip",
     })
-    vim.keymap.set("n", "<leader>nn", neogen.generate, { desc = "Neogen generate" })
+    vim.keymap.set("n", "<leader>c", neogen.generate, { desc = "Neogen generate" })
   end,
 }

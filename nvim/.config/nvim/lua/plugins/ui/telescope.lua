@@ -6,6 +6,14 @@ return {
       "nvim-lua/plenary.nvim",
     },
     config = function()
+      require("telescope").setup({
+        pickers = {
+          colorscheme = {
+            enable_preview = true,
+          },
+        },
+      })
+
       local builtin = require("telescope.builtin")
       vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find_files" })
       vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live_grep" })
@@ -17,6 +25,7 @@ return {
       vim.keymap.set("n", "<leader>fr", builtin.registers, { desc = "Telescope registers" })
     end,
   },
+
   {
     "nvim-telescope/telescope-ui-select.nvim",
     config = function()
@@ -30,6 +39,7 @@ return {
       require("telescope").load_extension("ui-select")
     end,
   },
+
   {
     "ghassan0/telescope-glyph.nvim",
     config = function()

@@ -8,23 +8,33 @@ return {
   },
   config = function()
     require("neo-tree").setup({
-      source_selector = {
-        statusline = true,
-      },
       sources = {
         "filesystem",
-        "buffers",
-        "git_status",
-        "document_symbols",
+      },
+      default_component_configs = {
+        modified = {
+          symbol = "",
+        },
+        name = {
+          trailing_slash = true,
+          highlight_opened_files = true,
+        },
       },
       filesystem = {
         filtered_items = {
           visible = true,
           hide_dotfiles = false,
+          hide_gitignored = false,
         },
+        hijack_netrw_behavior = "disabled",
         use_libuv_file_watcher = true,
       },
+      window = {
+        width = 50,
+      },
     })
-    vim.keymap.set({ "n", "v" }, "<C-n>", ":Neotree filesystem left toggle <cr>", { desc = "Neotree" })
+    vim.keymap.set({ "n", "v" }, "<C-n>", ":Neotree filesystem left toggle <cr>", { desc = "Neotree toogle" })
+    vim.keymap.set({ "n", "v" }, "<C-m>", ":Neotree filesystem current toggle <cr>", { desc = "Neotree current" })
+    vim.keymap.set({ "n", "v" }, "<C-,>", ":Neotree filesystem left reveal <cr>", { desc = "Neotree file" })
   end,
 }

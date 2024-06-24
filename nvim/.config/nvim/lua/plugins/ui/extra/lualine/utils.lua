@@ -1,5 +1,6 @@
 local M = {}
-M.get_active_lsp = {
+
+M.active_lsp = {
   function()
     local buffer_clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
     local null_ls_installed, null_ls = pcall(require, "null-ls")
@@ -30,7 +31,19 @@ M.get_active_lsp = {
   icon = "󰌘",
 }
 
-M.get_spock = {
+local color = string.format("%x", vim.api.nvim_get_hl(0, { name = "ErrorMsg", link = false }).fg)
+
+M.macro = {
+  function()
+    return vim.fn.reg_recording()
+  end,
+  icon = {
+    "󰑋",
+    color = { fg = color },
+  },
+}
+
+M.spock = {
   function()
     return ""
   end,

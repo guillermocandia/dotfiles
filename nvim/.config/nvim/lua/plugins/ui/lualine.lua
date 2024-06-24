@@ -1,4 +1,4 @@
-local utils = require("extra.lualine.utils")
+local utils = require("plugins.ui.extra.lualine.utils")
 
 local sections = {
   lualine_a = {},
@@ -9,6 +9,7 @@ local sections = {
       "diff",
       symbols = { added = " ", modified = "󰝤 ", removed = " " },
     },
+    utils.macro,
   },
   lualine_c = {},
   lualine_x = {
@@ -24,13 +25,13 @@ local sections = {
       update_in_insert = true,
       always_visible = true,
     },
-    utils.get_active_lsp,
+    utils.active_lsp,
     "filetype",
     "encoding",
     "fileformat",
     "progress",
     "location",
-    utils.get_spock,
+    utils.spock,
   },
   lualine_z = {},
 }

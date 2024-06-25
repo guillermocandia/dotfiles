@@ -51,7 +51,7 @@ return {
       },
       sections = sections,
       inactive_sections = sections,
-      extensions = { "neo-tree" },
+      extensions = { "neo-tree", "trouble" }, -- TODO trouble doesnt work
     })
   end,
 }

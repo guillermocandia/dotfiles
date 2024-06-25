@@ -30,7 +30,7 @@ return {
         use_libuv_file_watcher = true,
       },
       window = {
-        width = 50,
+        width = 46,
       },
     })
     vim.keymap.set({ "n", "v" }, "<C-n>", ":Neotree filesystem left toggle <cr>", { desc = "Neotree toogle" })

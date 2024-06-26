@@ -33,8 +33,8 @@ return {
         width = 46,
       },
     })
-    vim.keymap.set({ "n", "v" }, "<C-n>", ":Neotree filesystem left toggle <cr>", { desc = "Neotree toogle" })
-    vim.keymap.set({ "n", "v" }, "<C-m>", ":Neotree filesystem current toggle <cr>", { desc = "Neotree current" })
-    vim.keymap.set({ "n", "v" }, "<C-,>", ":Neotree filesystem left reveal <cr>", { desc = "Neotree file" })
+    vim.keymap.set({ "n", "v" }, "<C-n>", ":Neotree filesystem left toggle<cr>", { desc = "Neotree toogle" })
+    vim.keymap.set({ "n", "v" }, "<C-m>", ":Neotree filesystem current toggle<cr>", { desc = "Neotree current" })
+    vim.keymap.set({ "n", "v" }, "<C-,>", ":Neotree filesystem left reveal<cr>", { desc = "Neotree file" })
   end,
 }

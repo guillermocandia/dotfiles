@@ -25,6 +25,7 @@ return {
           "black", -- python formatter
           "isort", -- python formatter
           "shfmt", -- bash formatter
+          "markdownlint", -- markdown linter, formatter
         },
         automatic_installation = false,
         handlers = {},

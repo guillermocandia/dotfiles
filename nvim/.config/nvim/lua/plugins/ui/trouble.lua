@@ -6,10 +6,10 @@ return {
       warn_no_results = false,
       open_no_results = true,
     })
-    vim.keymap.set({ "n", "v", "i" }, "<C-d>", ":Trouble diagnostics toggle <cr>", { desc = "Trouble diagnostics" })
-    vim.keymap.set("n", "<leader>ts", ":Trouble symbols toggle focus=false <cr>", { desc = "Trouble symbols" })
-    vim.keymap.set("n", "<leader>tl", ":Trouble lsp toggle focus=false win.position=right <cr>", { desc = "Trouble lsp" })
-    vim.keymap.set("n", "<leader>tq", ":Trouble quickfix toggle <cr>", { desc = "Trouble quickfix" })
-    vim.keymap.set("n", "<leader>tL", ":Trouble locllist toggle <cr>", { desc = "Trouble loclist" })
+    vim.keymap.set({ "n", "v", "i" }, "<C-d>", ":Trouble diagnostics toggle<cr>", { desc = "Trouble diagnostics" })
+    vim.keymap.set("n", "<leader>ts", ":Trouble symbols toggle focus=false<cr>", { desc = "Trouble symbols" })
+    vim.keymap.set("n", "<leader>tl", ":Trouble lsp toggle focus=false win.position=right<cr>", { desc = "Trouble lsp" })
+    vim.keymap.set("n", "<leader>tq", ":Trouble quickfix toggle<cr>", { desc = "Trouble quickfix" })
+    vim.keymap.set("n", "<leader>tL", ":Trouble locllist toggle<cr>", { desc = "Trouble loclist" })
   end,
 }

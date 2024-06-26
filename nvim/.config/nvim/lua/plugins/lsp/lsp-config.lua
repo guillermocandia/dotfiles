@@ -11,12 +11,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      local servers = {
-        "bashls", -- bash
-        -- "jedi_language_server", -- python
-        -- "pyright", -- python
-        "pylsp", -- python
-      }
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local lspconfig = require("lspconfig")
       local mason_lspconfig = require("mason-lspconfig")
@@ -26,6 +20,7 @@ return {
         automatic_installation = true,
       })
 
+      -- lua
       lspconfig.lua_ls.setup({
         capabilities = capabilities,
         settings = {
@@ -35,6 +30,11 @@ return {
         },
       })
 
+      local servers = {
+        "bashls", -- bash
+        "pylsp", -- python
+        "marksman", -- markdown
+      }
       for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup({
           capabilities = capabilities,

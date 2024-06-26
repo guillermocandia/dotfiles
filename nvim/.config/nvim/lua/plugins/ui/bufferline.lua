@@ -29,10 +29,10 @@ return {
     config = function(_, opts)
       local bf = require("bufferline")
       bf.setup(opts)
-      vim.keymap.set({ "n", "v" }, "<leader>bcr", ":BufferLineCloseRight <cr>", { desc = "BufferLineCloseRight" })
-      vim.keymap.set({ "n", "v" }, "<leader>bcl", ":BufferLineCloseLeft <cr>", { desc = "BufferLineCloseLeft" })
-      vim.keymap.set({ "n", "v" }, "<leader>bco", ":BufferLineCloseOthers <cr>", { desc = "BufferLineCloseOthers" })
-      vim.keymap.set({ "n", "v" }, "<leader>bp", ":BufferLineTogglePin <cr>", { desc = "BufferLineTogglePin" })
+      vim.keymap.set({ "n", "v" }, "<leader>bcr", ":BufferLineCloseRight<cr>", { desc = "BufferLineCloseRight" })
+      vim.keymap.set({ "n", "v" }, "<leader>bcl", ":BufferLineCloseLeft<cr>", { desc = "BufferLineCloseLeft" })
+      vim.keymap.set({ "n", "v" }, "<leader>bco", ":BufferLineCloseOthers<cr>", { desc = "BufferLineCloseOthers" })
+      vim.keymap.set({ "n", "v" }, "<leader>bp", ":BufferLineTogglePin<cr>", { desc = "BufferLineTogglePin" })
 
       for i = 1, 9 do
         vim.keymap.set({ "n", "v" }, "<leader>" .. i, function()

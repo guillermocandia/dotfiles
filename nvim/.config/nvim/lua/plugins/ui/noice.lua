@@ -15,6 +15,9 @@ return {
           ["vim.lsp.util.stylize_markdown"] = true,
           ["cmp.entry.get_documentation"] = true,
         },
+        progress = {
+          view = "notify", -- mini
+        },
       },
       cmdline = {
         view = "cmdline_popup",

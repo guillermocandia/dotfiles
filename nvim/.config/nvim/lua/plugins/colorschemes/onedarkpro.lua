@@ -3,5 +3,5 @@ return {
   name = "onedarkpro",
   lazy = false,
   priority = 1000,
-  enabled = true,
+  enabled = false,
 }

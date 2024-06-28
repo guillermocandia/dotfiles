@@ -32,12 +32,12 @@ return {
       vim.keymap.set({ "n", "v" }, "<leader>bcr", ":BufferLineCloseRight<cr>", { desc = "BufferLineCloseRight" })
       vim.keymap.set({ "n", "v" }, "<leader>bcl", ":BufferLineCloseLeft<cr>", { desc = "BufferLineCloseLeft" })
       vim.keymap.set({ "n", "v" }, "<leader>bco", ":BufferLineCloseOthers<cr>", { desc = "BufferLineCloseOthers" })
-      vim.keymap.set({ "n", "v" }, "<leader>bp", ":BufferLineTogglePin<cr>", { desc = "BufferLineTogglePin" })
+      vim.keymap.set({ "n", "v" }, "<leader>bt", ":BufferLineTogglePin<cr>", { desc = "BufferLineTogglePin" })
 
       for i = 1, 9 do
         vim.keymap.set({ "n", "v" }, "<leader>" .. i, function()
           bf.go_to(i, true)
-        end, { desc = "BufferLine go to " .. i })
+        end, { desc = "Go to buffer " .. i })
       end
     end,
   },

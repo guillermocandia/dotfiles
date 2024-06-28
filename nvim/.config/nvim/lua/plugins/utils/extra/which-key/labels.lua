@@ -7,6 +7,7 @@ local labels = {
   ["<leader>dp"] = { name = "Python" },
   ["<leader>g"] = { name = "Git" },
   ["<leader>t"] = { name = "Trouble" },
+  ["<leader>n"] = { name = "Noice" },
   ["<leader>e"] = { name = "ETC" },
 }
 

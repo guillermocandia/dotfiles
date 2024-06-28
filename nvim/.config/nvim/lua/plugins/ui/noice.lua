@@ -9,6 +9,9 @@ return {
   config = function()
     local noice = require("noice")
     noice.setup({
+      presets = {
+        inc_rename = true,
+      },
       lsp = {
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -16,7 +19,7 @@ return {
           ["cmp.entry.get_documentation"] = true,
         },
         progress = {
-          view = "notify", -- mini
+          view = "mini",
         },
       },
       cmdline = {

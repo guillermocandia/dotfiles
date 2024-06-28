@@ -15,6 +15,7 @@
   "kanagawa": { "branch": "master", "commit": "7735b2147ee6d223e43287044caa4fb070bdfa3d" },
   "lazy.nvim": { "branch": "main", "commit": "9bcbbc17a77680992fc9afcf3819f3b5c8f06bba" },
   "lazydev.nvim": { "branch": "main", "commit": "78d8a11fbd02ad4eafa07dd8a43a959a69fb3bf8" },
+  "lazygit.nvim": { "branch": "main", "commit": "ad3e1ea592f9d13e86e0d4e850224d9d78069508" },
   "lualine.nvim": { "branch": "master", "commit": "0a5a66803c7407767b799067986b4dc3036e1983" },
   "luvit-meta": { "branch": "main", "commit": "ce76f6f6cdc9201523a5875a4471dcfe0186eb60" },
   "markdown-preview.nvim": { "branch": "master", "commit": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee" },

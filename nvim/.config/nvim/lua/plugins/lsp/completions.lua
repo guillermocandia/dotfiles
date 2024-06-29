@@ -4,8 +4,9 @@ return {
     dependencies = {
       "saadparwaiz1/cmp_luasnip",
       "rafamadriz/friendly-snippets",
-      "kmarius/jsregexp",
+      -- "kmarius/jsregexp",
     },
+    build = "make install_jsregexp",
   },
   {
     "hrsh7th/nvim-cmp",

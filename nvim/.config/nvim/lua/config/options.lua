@@ -13,7 +13,7 @@ vim.diagnostic.config({
     source = true,
   },
   underline = false,
-  update_in_insert = true,
+  update_in_insert = false,
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = "",

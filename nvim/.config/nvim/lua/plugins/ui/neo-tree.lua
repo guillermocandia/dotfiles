@@ -13,7 +13,7 @@ return {
       },
       default_component_configs = {
         modified = {
-          symbol = "",
+          symbol = "",
         },
         name = {
           trailing_slash = true,

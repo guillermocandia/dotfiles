@@ -6,5 +6,5 @@ title = "x"
 decorations = "None"
 
 [font]
-normal = { family = "JetBrainsMono Nerd Font Mono", style = "Regular" }
-size = 9.5
+normal = { family = "Inconsolata Nerd Font Mono", style = "Bold" }
+size = 10

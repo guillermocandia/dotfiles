@@ -3,4 +3,4 @@ require("config.keymaps")
 require("config.lazy-setup")
 require("config.dev")
 
-vim.cmd.colorscheme("moonfly")
+vim.cmd.colorscheme("nightfox")

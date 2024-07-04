@@ -1,41 +1,42 @@
-[ -z "$PS1" ] && return
+case $- in
+*i*) ;;
+*) return ;;
+esac
 
 HISTCONTROL=ignoreboth
-HISTSIZE=5000
-HISTFILESIZE=5000
-HISTTIMEFORMAT="%F %T " # TODO: format
+HISTSIZE=10000
+HISTFILESIZE=10000
+HISTTIMEFORMAT="%Y%m%d %T "
 
 shopt -s histappend
 shopt -s checkwinsize
-
-# TODO: make this work with alacritty
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm* | rxvt*)
-  PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-  ;;
-*) ;;
-esac
+shopt -s dotglob
 
 if [ -x /usr/bin/dircolors ]; then
-  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-  alias ls='ls --color=auto'
-  alias grep='grep --color=auto'
+	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+	alias ls="ls --color=auto"
+	alias grep="grep --color=auto"
 fi
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-  . /etc/bash_completion
+	. /etc/bash_completion
+fi
+if [ -f ~/.kube/completion.bash.inc ]; then
+	. ~/.kube/completion.bash.inc
 fi
 
-PS1='\[\033[01;31m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ ' # TODO: add git info
+git_branch() {
+	if [ -d .git ]; then
+		echo "($(git branch | cut -d " " -f 2)) "
+	fi
+}
 
-# xmonad + java TODO: maybe its not necesary anymore
-AWT_TOOLKIT=MToolkit
-export AWT_TOOLKIT=MToolkit
-_JAVA_AWT_WM_NONREPARENTING=1
-export _JAVA_AWT_WM_NONREPARENTING
+TITLE="\[\e]0;\w\a\]"
+GIT='\[\033[01;36m\]$(git_branch)'
+MAIN="\[\033[01;34m\][\w]\[\033[00m\] $ "
+PS1=$TITLE$GIT$MAIN
 
-alias xterm='xterm -vb'
+alias xterm="xterm -vb"
 alias kubectl="kubecolor"
 alias ssh="env TERM=xterm-256color ssh"
 

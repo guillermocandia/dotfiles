@@ -12,6 +12,9 @@ vim.opt.cursorline = true
 
 vim.opt.termguicolors = true
 
+vim.opt.titlestring = "nvim"
+vim.opt.title = true
+
 vim.diagnostic.config({
   virtual_text = {
     virt_text_pos = "right_align",

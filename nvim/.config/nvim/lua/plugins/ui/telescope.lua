@@ -46,4 +46,14 @@ return {
       require("telescope").load_extension("glyph")
     end,
   },
+
+  {
+    "ziontee113/icon-picker.nvim",
+    config = function()
+      require("icon-picker").setup({ disable_legacy_commands = true })
+
+      vim.keymap.set("n", "<leader>fp", ":IconPickerYank<cr>", { desc = "Icon picker yank" })
+      vim.keymap.set("i", "<C-i>", ":IconPickerInsert<cr>", { desc = "Icon picker" })
+    end,
+  },
 }

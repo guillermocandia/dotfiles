@@ -40,5 +40,4 @@ alias xterm="xterm -vb"
 alias kubectl="kubecolor"
 alias ssh="env TERM=xterm-256color ssh"
 
-export PATH=$HOME/bin:$PATH
-. "$HOME/.cargo/env"
+export PATH=~/bin:~/.local/bin:~/.cargo/bin:$PATH

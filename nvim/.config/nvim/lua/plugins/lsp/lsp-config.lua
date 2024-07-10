@@ -47,7 +47,7 @@ return {
       opts.desc = "LSP definition"
       vim.keymap.set({ "n", "v" }, "<leader>ld", vim.lsp.buf.definition, opts)
       opts.desc = "LSP declaration"
-      vim.keymap.set({"n", "v"}, "<leader>fD", vim.lsp.buf.declaration, opts)
+      vim.keymap.set({ "n", "v" }, "<leader>fD", vim.lsp.buf.declaration, opts)
       opts.desc = "LSP code action"
       vim.keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts)
       opts.desc = "LSP format"

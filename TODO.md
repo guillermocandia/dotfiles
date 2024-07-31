@@ -1,8 +1,6 @@
 # TODOs
 
-* TODO: nvim: noremap, silent
 * TODO: haskell lsp, formatter, linter. Learn stack.yaml
-* TODO: update PATH on startuphook or make session manager to read bashrc or .profile
 * TODO: theme for xmobar
 * TODO: search new layouts, conf, change names
 * TODO: Layout: 1 tiled one float

@@ -40,4 +40,10 @@ alias xterm="xterm -vb"
 alias kubectl="kubecolor"
 alias ssh="env TERM=xterm-256color ssh"
 
+if $PATH_CONFIGURED; then
+	return
+fi
+
 export PATH=~/bin:~/.local/bin:~/.cargo/bin:$PATH
+
+[ -f "~/.ghcup/env" ] && . "/.ghcup/env" # ghcup-env

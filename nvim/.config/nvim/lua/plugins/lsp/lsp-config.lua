@@ -20,9 +20,31 @@ return {
         automatic_installation = true,
       })
 
+      -- use none-ls for formatting
+      local lsp_formatting = function(bufnr)
+        vim.lsp.buf.format({
+          filter = function(client)
+            return client.name == "null-ls"
+          end,
+          bufnr = bufnr,
+        })
+      end
+
+      local on_attach = function(client, bufnr)
+        if client.supports_method("textDocument/formatting") then
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            callback = function()
+              lsp_formatting(bufnr)
+            end,
+          })
+        end
+      end
+
       -- lua
       lspconfig.lua_ls.setup({
         capabilities = capabilities,
+        on_attach = on_attach,
         settings = {
           Lua = {
             diagnostics = { globals = { "vim" } },
@@ -38,6 +60,7 @@ return {
       for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup({
           capabilities = capabilities,
+          on_attach = on_attach,
         })
       end
 

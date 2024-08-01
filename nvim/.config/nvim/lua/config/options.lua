@@ -12,6 +12,9 @@ vim.opt.cursorline = true
 
 vim.opt.termguicolors = true
 
+vim.opt.mouse = "nvi"
+vim.opt.mousemodel = "extend"
+
 vim.opt.titlestring = "nvim"
 vim.opt.title = true
 

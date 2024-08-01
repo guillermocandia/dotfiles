@@ -1,5 +1,3 @@
-export PATH=~/bin:~/.local/bin:~/.cargo/bin:$PATH
-
-[ -f "~/.ghcup/env" ] && . "~/.ghcup/env" # ghcup-env
+export PATH=~/bin:~/.local/bin:~/.cargo/bin:~/.ghcup/bin/:$PATH
 
 export PATH_CONFIGURED=true

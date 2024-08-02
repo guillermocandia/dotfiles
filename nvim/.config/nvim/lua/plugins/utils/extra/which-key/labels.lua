@@ -9,6 +9,7 @@ local labels = {
   ["<leader>t"] = { name = "Trouble" },
   ["<leader>n"] = { name = "Noice" },
   ["<leader>e"] = { name = "ETC" },
+  ["<leader>h"] = { name = "Haskell tools" },
 }
 
 return labels

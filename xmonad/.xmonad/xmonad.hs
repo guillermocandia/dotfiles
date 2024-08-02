@@ -1,20 +1,39 @@
+{-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
+{-# OPTIONS_GHC -Wno-missing-signatures #-}
+{-# OPTIONS_GHC -Wno-type-defaults #-}
+{-# OPTIONS_GHC -Wno-deferred-type-errors #-}
 import XMonad
+    ( spawn,
+      XConfig(focusedBorderColor, modMask, layoutHook, workspaces),
+      Default(def),
+      mod4Mask,
+      (|||),
+      Full(Full),
+      Mirror(Mirror),
+      Tall(Tall),
+      windows,
+      xmonad )
 
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
+    ( shorten,
+      wrap,
+      xmobarColor,
+      xmobarRaw,
+      xmobarStrip,
+      PP(ppExtras, ppSep, ppTitleSanitize, ppCurrent, ppVisible,
+         ppHidden, ppHiddenNoWindows, ppWsSep, ppUrgent, ppOrder) )
+import XMonad.Hooks.ManageDocks ( avoidStruts )
+import XMonad.Hooks.StatusBar
+    ( defToggleStrutsKey, statusBarProp, withEasySB )
 
-import XMonad.Util.EZConfig
-import XMonad.Util.Loggers
-import XMonad.Util.Ungrab
+import XMonad.Util.EZConfig ( additionalKeysP )
+import XMonad.Util.Loggers ( logTitles )
 
-import XMonad.Layout.Magnifier
-import XMonad.Layout.ThreeColumns
-import XMonad.Layout.NoBorders
+import XMonad.Layout.Magnifier ( magnifiercz' )
+import XMonad.Layout.ThreeColumns ( ThreeCol(ThreeColMid) )
+import XMonad.Layout.NoBorders ( noBorders )
 
-import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.EwmhDesktops ( ewmh, ewmhFullscreen )
 
 import qualified XMonad.StackSet as W
 
@@ -75,7 +94,7 @@ myXmobarPP = def
     , ppHiddenNoWindows = hiddenNoWindows . wrap " " " "
     , ppWsSep           = wsSep ""
     , ppUrgent          = red . wrap (yellow "!") (yellow "!")
-    , ppOrder           = \[ws, l, _, wins] -> [ws, wins]
+    , ppOrder           = \[ws, l, _, wins] -> [ws, l ,wins]
     , ppExtras          = [logTitles formatFocused formatUnfocused]
     }
   where

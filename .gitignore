@@ -1,3 +1,9 @@
 build-x86_64-linux
 xmonad-x86_64-linux
 xmonad.errors
+.stack-work
+xmonad.hi
+xmonad.o
+xmonad-0.18.0
+xmonad-contrib-0.18.0
+xmobar-0.48.1

@@ -1,6 +1,6 @@
 # TODOs
 
-* TODO: haskell lsp, formatter, linter. Learn stack.yaml
+* TODO: haskell formatter, linter.
 * TODO: theme for xmobar
 * TODO: search new layouts, conf, change names
 * TODO: Layout: 1 tiled one float

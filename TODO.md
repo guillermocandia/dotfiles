@@ -1,7 +1,6 @@
 # TODOs
 
 * TODO: haskell formatter, linter.
-* TODO: yaml lsp, formatter, linter
 * TODO: theme for xmobar
 * TODO: search new layouts, conf, change names
 * TODO: Layout: 1 tiled one float
@@ -13,3 +12,4 @@
 * TODO: managed hook for defold float game window | use xprop
 * TODO: key doFloat
 * TODO: lazygit conf
+* TODO. use package.yaml with xmonad conf

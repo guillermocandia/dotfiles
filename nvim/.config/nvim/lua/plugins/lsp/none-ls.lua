@@ -26,6 +26,7 @@ return {
           "isort", -- python formatter
           "shfmt", -- bash formatter
           "markdownlint", -- markdown linter, formatter
+          "yamlfmt", -- yaml formatter
         },
         automatic_installation = false,
         handlers = {},

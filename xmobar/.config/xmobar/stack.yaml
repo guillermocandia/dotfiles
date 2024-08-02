@@ -1,0 +1,14 @@
+resolver:
+  url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/22/31.yaml
+
+packages:
+- .
+
+extra-deps:
+- xmobar-0.48.1
+
+flags:
+ xmobar:
+  with_dbus: true
+  with_threaded: true
+  with_xpm: true

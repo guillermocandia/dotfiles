@@ -32,6 +32,8 @@ resolver:
 packages:
 - xmonad-0.18.0
 - xmonad-contrib-0.18.0
+- X11-1.10.3
+# - X11-extras-0.4
 # - xmobar-0.48.1
 # Dependency packages to be pulled from upstream that are not in the resolver.
 # These entries can reference officially published versions as well as
@@ -51,6 +53,9 @@ packages:
 #   with_dbus: true
 #   with_threaded: true
 #   with_xpm: true
+# flags:
+  # X11:
+
 
 # Extra package databases containing global packages
 # extra-package-dbs: []
@@ -72,3 +77,4 @@ packages:
 #
 # Allow a newer minor version of GHC than the snapshot specifies
 # compiler-check: newer-minor
+allow-newer: true

@@ -1,6 +1,5 @@
 # TODOs
 
-* TODO: haskell snippets https://github.com/mrcjkb/haskell-snippets.nvim 
 * TODO: theme for xmobar
 * TODO: search new layouts, conf, change names
 * TODO: Layout: 1 tiled one float
@@ -13,3 +12,4 @@
 * TODO: key doFloat
 * TODO: lazygit conf
 * TODO: use package.yaml with xmonad conf
+* TODO: django snippets

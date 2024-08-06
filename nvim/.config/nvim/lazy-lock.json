@@ -10,6 +10,7 @@
   "dressing.nvim": { "branch": "master", "commit": "6741f1062d3dc6e4755367a7e9b347b553623f04" },
   "friendly-snippets": { "branch": "main", "commit": "00ebcaa159e817150bd83bfe2d51fa3b3377d5c4" },
   "gitsigns.nvim": { "branch": "main", "commit": "f074844b60f9e151970fbcdbeb8a2cd52b6ef25a" },
+  "haskell-snippets.nvim": { "branch": "master", "commit": "e430927cb222718e14ac32116011b5e3df39ab51" },
   "haskell-tools.nvim": { "branch": "master", "commit": "8d345979303bc08c6689f2b903a7a8fe2a4dd9cd" },
   "inc-rename.nvim": { "branch": "main", "commit": "8ba77017ca468f3029bf88ef409c2d20476ea66b" },
   "indent-blankline.nvim": { "branch": "master", "commit": "65e20ab94a26d0e14acac5049b8641336819dfc7" },

@@ -4,9 +4,19 @@ return {
     dependencies = {
       "saadparwaiz1/cmp_luasnip",
       "rafamadriz/friendly-snippets",
-      -- "kmarius/jsregexp",
+      "mrcjkb/haskell-snippets.nvim",
     },
     build = "make install_jsregexp",
+    conig = function()
+      local luasnip = require("luasnip")
+      luasnip.setup()
+
+      require("luasnip.loaders.from_vscode").lazy_load()
+      -- require("luasnip").filetype_extend("python", { "django" }) TODO
+
+      local haskell_snippets = require("haskell-snippets").all
+      luasnip.add_snippets("haskell", haskell_snippets, { key = "haskell" })
+    end,
   },
   {
     "hrsh7th/nvim-cmp",
@@ -19,8 +29,6 @@ return {
     },
     config = function()
       local cmp = require("cmp")
-      require("luasnip.loaders.from_vscode").lazy_load()
-      -- require("luasnip").filetype_extend("python", { "django" }) TODO
 
       cmp.setup({
         snippet = {

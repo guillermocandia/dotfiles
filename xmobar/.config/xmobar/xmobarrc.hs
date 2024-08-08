@@ -1,36 +1,32 @@
-{-# LANGUAGE PostfixOperators #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-
--- {-# LANGUAGE LambdaCase          #-}
-
--- https://gitlab.com/slotThe/dotfiles/-/blob/master/xmobar/xmobarrc.hs?ref_type=heads
--- https://codeberg.org/xmobar/xmobar#headline-4
--- https://gitlab.com/jaor/xmobar-config/
---
-
+import Monitors (date, eno1, gpu, headphones, locks, memory, multiCoreTemp, multiCpu, speakers, upgradeable, uptime)
 import Xmobar
     ( Border (NoBorder)
-    , Command (Com)
     , Config
         ( additionalFonts
         , alignSep
+        , allDesktops
+        , alpha
         , bgColor
         , border
+        , borderColor
+        , borderWidth
         , commands
         , fgColor
         , font
+        , hideOnStart
         , lowerOnStart
         , overrideRedirect
+        , persistent
+        , pickBroadest
         , position
         , sepChar
         , template
+        , textOffset
+        , verbose
         )
-    , Date (Date)
-    , Locks (Locks)
-    , Monitors (CoreTemp, DiskU, Memory, MultiCpu, Network, Uptime)
     , Runnable (Run)
     , XMonadLog (XMonadLog)
-    , XPosition (Bottom, Top)
+    , XPosition (Top)
     , defaultConfig
     , xmobar
     )
@@ -41,102 +37,66 @@ main = xmobar config
 config :: Config
 config =
     defaultConfig
-        { overrideRedirect = False
-        , font = "Dejavu Sans Mono Bold 8"
-        , additionalFonts = ["Noto Color Emoji Regular"]
-        , bgColor = "black"
-        , fgColor = "darkgrey"
-        , position = Bottom
+        { font = "Inconsolata Nerd Font Mono Bold 9"
+        , additionalFonts = ["Inconsolata Nerd Font Mono Bold 18", "Noto Color Emoji Regular"]
+        , bgColor = black myColorScheme
+        , fgColor = cyan myColorScheme
+        , position = Top
+        , textOffset = 0
         , border = NoBorder
+        , borderColor = black myColorScheme
+        , borderWidth = 0
+        , alpha = 255
+        , hideOnStart = False
+        , allDesktops = False
+        , overrideRedirect = False
+        , pickBroadest = False
         , lowerOnStart = False
-        , commands =
-            [ Run Locks
-            , Run $
-                DiskU
-                    [("/", "<fn=1>🗄</fn>/:<free>"), ("/home", "/home:<free>")]
-                    ["-L", "20", "-H", "50", "-m", "1", "-p", "3"]
-                    50
-            , Run $
-                MultiCpu
-                    [ "--template"
-                    , "<fn=1>🤖</fn> <autototal>"
-                    , "--ppad"
-                    , "2"
-                    , "--padchars"
-                    , "0"
-                    , "--Low"
-                    , "40"
-                    , "--High"
-                    , "80"
-                    , "--low"
-                    , "lightcyan"
-                    , "--normal"
-                    , "cyan"
-                    , "--high"
-                    , "red"
-                    ]
-                    10
-            , Run $
-                CoreTemp
-                    [ "--template"
-                    , "<fn=1>🌡</fn><core0>ºC"
-                    , "--Low"
-                    , "40"
-                    , "--High"
-                    , "80"
-                    , "--low"
-                    , "lightcyan"
-                    , "--normal"
-                    , "cyan"
-                    , "--high"
-                    , "red"
-                    ]
-                    20
-            , Run $
-                Memory
-                    [ "--template"
-                    , "<fn=1>🐘</fn><usedratio>%"
-                    , "--Low"
-                    , "20"
-                    , "--High"
-                    , "80"
-                    , "--low"
-                    , "lightcyan"
-                    , "--normal"
-                    , "cyan"
-                    , "--high"
-                    , "red"
-                    ]
-                    20
-            , Run $
-                Network
-                    "eno1"
-                    [ "--template"
-                    , "<fn=1>⬇</fn><fc=cyan><rx></fc><fn=1>⬆</fn><fc=cyan><tx></fc>"
-                    , "--suffix"
-                    , "True"
-                    , "--width"
-                    , "7"
-                    ]
-                    20
-            , Run $ Com "/home/zink/.xmonad/scripts/get-gpu.sh" [] "gpu" 10
-            , Run $ Com "/home/zink/.xmonad/scripts/get-upgradeable.sh" [] "upgradeable" 100
-            , Run $ Com "/home/zink/.xmonad/scripts/get-volume.sh" ["speakers"] "speakers" 10
-            , Run $ Com "/home/zink/.xmonad/scripts/get-volume.sh" ["headphones"] "headphones" 10
-            , Run $
-                Uptime
-                    [ "--template"
-                    , "<fn=1>😄</fn><fc=cyan><days></fc>d<fc=cyan><hours></fc>h<fc=cyan><minutes></fc>m<fc=cyan><seconds></fc>s"
-                    , "--suffix"
-                    , "False"
-                    , "--minwidth"
-                    , "2"
-                    ]
-                    10
-            , Run $ Date "<fn=1>⌛</fn><fc=cyan>%X %d-%m-%Y</fc>" "date" 10
-            , Run XMonadLog
-            ]
+        , persistent = True
+        , commands = myCommands
         , sepChar = "%"
         , alignSep = "}{"
-        , template = "%XMonadLog% }aaaaaaaaaa{ %locks% %disku% HOLA %multicpu% %coretemp% %memory% %eno1% %gpu% %upgradeable% %speakers% %headphones% %uptime% %date% <fn=1>🖖</fn>"
+        , template = "%XMonadLog% }{ %locks% %multicpu% %multicoretemp% %memory% %eno1% %gpu% %upgradeable% %speakers% %headphones% %uptime% %date%│<fn=1>\xf259</fn>"
+        , verbose = False
+        }
+
+myCommands :: [Runnable]
+myCommands =
+    [ Run multiCpu
+    , Run multiCoreTemp
+    , Run memory
+    , Run date
+    , Run locks
+    , Run eno1
+    , Run uptime
+    , Run upgradeable
+    , Run gpu
+    , Run speakers
+    , Run headphones
+    , Run XMonadLog
+    ]
+
+data ColorScheme = ColorScheme
+    { black
+      , red
+      , green
+      , yellow
+      , blue
+      , magenta
+      , cyan
+      , white
+        :: String
+    }
+
+myColorScheme :: ColorScheme
+myColorScheme =
+    ColorScheme
+        { black = "#3b4252"
+        , red = "#bf616a"
+        , green = "#a3be8c"
+        , yellow = "#ebcb8b"
+        , blue = "#81a1c1"
+        , magenta = "#b48ead"
+        , cyan = "#88c0d0"
+        , white = "#e5e9f0"
         }

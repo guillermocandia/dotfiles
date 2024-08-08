@@ -1,6 +1,6 @@
 indentation: 4
 column-limit: none
-function-arrows: leading-args
+function-arrows: leading
 comma-style: leading
 import-export-style: leading
 indent-wheres: true

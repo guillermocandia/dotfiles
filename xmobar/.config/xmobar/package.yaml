@@ -1,28 +1,28 @@
-name:                xmobarrc
-version:             0.1.0.0
-
-description:         My custom xmobarrc
-
+name: xmobarrc
+version: 0.1.0.0
+description: My custom xmobarrc
 dependencies:
-- base >= 4.7 && < 5
-# - text
-- xmobar
-
+  - base >= 4.7 && < 5
+  # - text
+  - xmobar
 ghc-options:
-- -Wall
-- -Wcompat
-- -Widentities
-- -Wincomplete-record-updates
-- -Wincomplete-uni-patterns
-- -Wmissing-export-lists
-- -Wmissing-home-modules
-- -Wpartial-fields
-- -Wredundant-constraints
-
+  - -Wall
+  - -Wcompat
+  - -Widentities
+  - -Wincomplete-record-updates
+  - -Wincomplete-uni-patterns
+  - -Wmissing-export-lists
+  - -Wmissing-home-modules
+  - -Wpartial-fields
+  - -Wredundant-constraints
+library:
+  source-dirs: lib
 executables:
   xmobar:
-    main:                xmobarrc.hs
+    main: xmobarrc.hs
     ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - xmobarrc

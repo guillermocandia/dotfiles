@@ -9,6 +9,19 @@ version:        0.1.0.0
 description:    My custom xmobarrc
 build-type:     Simple
 
+library
+  exposed-modules:
+      Monitors
+  other-modules:
+      Paths_xmobarrc
+  hs-source-dirs:
+      lib
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+    , xmobar
+  default-language: Haskell2010
+
 executable xmobar
   main-is: xmobarrc.hs
   other-modules:
@@ -17,4 +30,5 @@ executable xmobar
   build-depends:
       base >=4.7 && <5
     , xmobar
+    , xmobarrc
   default-language: Haskell2010

@@ -11,7 +11,8 @@ build-type:     Simple
 
 library
   exposed-modules:
-      Custom
+      Customs
+      Customs.ShowText
       Monitors
   other-modules:
       Paths_xmobarrc

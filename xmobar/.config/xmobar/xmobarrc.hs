@@ -1,4 +1,5 @@
-import Monitors (date, eno1, gpu, headphones, locks, memory, multiCoreTemp, multiCpu, speakers, upgradeable, uptime, spock)
+import Customs(spock)
+import Monitors (date, eno1, gpu, headphones, locks, memory, multiCoreTemp, multiCpu, speakers, upgradeable, uptime)
 import Xmobar
     ( Border (NoBorder)
     , Config

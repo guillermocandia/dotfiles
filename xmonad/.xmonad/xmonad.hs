@@ -1,7 +1,8 @@
-{-# OPTIONS_GHC -Wno-deferred-type-errors #-}
-{-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
-{-# OPTIONS_GHC -Wno-missing-signatures #-}
-{-# OPTIONS_GHC -Wno-type-defaults #-}
+-- {-# OPTIONS_GHC -Wno-deferred-type-errors #-}
+-- {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
+
+-- {-# OPTIONS_GHC -Wno-missing-signatures #-}
+-- {-# OPTIONS_GHC -Wno-type-defaults #-}
 
 import XMonad
     ( Default (def)
@@ -15,6 +16,7 @@ import XMonad
     , xmonad
     , (|||)
     )
+import XMonad.Hooks.DynamicLog (xmobarColor)
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
 import XMonad.Hooks.ManageDocks (avoidStruts)
 import XMonad.Hooks.StatusBar
@@ -48,9 +50,6 @@ import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Loggers (logTitles)
 
-myWorkspaces = map show [1 .. 12]
-
-main :: IO ()
 main =
     xmonad
         . ewmhFullscreen
@@ -66,6 +65,17 @@ myConfig =
         , focusedBorderColor = "cyan"
         }
         `additionalKeysP` myKeys
+
+myLayout =
+    avoidStruts . noBorders $ tiled ||| Mirror tiled ||| Full ||| threeCol
+    where
+        threeCol = magnifiercz' 1.3 $ ThreeColMid nmaster delta ratio
+        tiled = Tall nmaster delta ratio
+        nmaster = 1 -- Default number of windows in the master pane
+        ratio = 1 / 2 -- Default proportion of screen occupied by master pane
+        delta = 3 / 100 -- Percent of screen to increment by when resizing panes
+
+myWorkspaces = map show [1 .. 12]
 
 myKeys =
     [ ("M-S-<Return>", spawn "$HOME/.cargo/bin/alacritty")
@@ -90,26 +100,17 @@ myKeys =
                 ]
            ]
 
-myLayout =
-    avoidStruts . noBorders $ tiled ||| Mirror tiled ||| Full ||| threeCol
-    where
-        threeCol = magnifiercz' 1.3 $ ThreeColMid nmaster delta ratio
-        tiled = Tall nmaster delta ratio
-        nmaster = 1 -- Default number of windows in the master pane
-        ratio = 1 / 2 -- Default proportion of screen occupied by master pane
-        delta = 3 / 100 -- Percent of screen to increment by when resizing panes
-
 myXmobarPP :: PP
 myXmobarPP =
     def
-        { ppSep = " "
-        , ppTitleSanitize = xmobarStrip
-        , ppCurrent = current . wrap " " " "
+        { ppCurrent = current . wrap " " " "
         , ppVisible = visible . wrap " " " "
         , ppHidden = hidden . wrap " " " "
         , ppHiddenNoWindows = hiddenNoWindows . wrap " " " "
-        , ppWsSep = wsSep ""
-        , ppUrgent = red . wrap (yellow "!") (yellow "!")
+        , ppUrgent = urgentRed . wrap (urgentYellow "!") (urgentYellow "!")
+        , ppTitleSanitize = xmobarStrip
+        , ppSep = " "
+        , ppWsSep = ""
         , ppOrder = \[ws, l, _, wins] -> [ws, l, wins]
         , ppExtras = [logTitles formatFocused formatUnfocused]
         }
@@ -121,11 +122,37 @@ myXmobarPP =
         ppWindow :: String -> String
         ppWindow = xmobarRaw . (\w -> if null w then "untitled" else w) . shorten 30
 
-        red, yellow, current, visible, hidden, hiddenNoWindows, wsSep :: String -> String
-        current = xmobarColor "black" "cyan"
-        visible = xmobarColor "black" "lightcyan"
-        hidden = xmobarColor "black" "darkgrey"
-        hiddenNoWindows = xmobarColor "darkgrey" "black"
-        wsSep = xmobarColor "black" "black"
-        yellow = xmobarColor "#f1fa8c" ""
-        red = xmobarColor "#ff5555" ""
+        urgentRed, urgentYellow, current, visible, hidden, hiddenNoWindows, wsSep :: String -> String
+        current = xmobarColor (black myColorScheme) (cyan myColorScheme)
+        visible = xmobarColor (black myColorScheme) (blue myColorScheme)
+        hidden = xmobarColor (cyan myColorScheme) (black myColorScheme)
+        hiddenNoWindows = xmobarColor (blue myColorScheme) (black myColorScheme)
+
+        wsSep = xmobarColor (black myColorScheme) (black myColorScheme)
+        urgentYellow = xmobarColor (yellow myColorScheme) ""
+        urgentRed = xmobarColor (red myColorScheme) ""
+
+data ColorScheme = ColorScheme
+    { black
+      , red
+      , green
+      , yellow
+      , blue
+      , magenta
+      , cyan
+      , white
+        :: String
+    }
+
+myColorScheme :: ColorScheme
+myColorScheme =
+    ColorScheme
+        { black = "#3b4252"
+        , red = "#bf616a"
+        , green = "#a3be8c"
+        , yellow = "#ebcb8b"
+        , blue = "#81a1c1"
+        , magenta = "#b48ead"
+        , cyan = "#88c0d0"
+        , white = "#e5e9f0"
+        }

@@ -1,5 +1,5 @@
-import Customs(spock)
-import Monitors (date, eno1, gpu, headphones, locks, memory, multiCoreTemp, multiCpu, speakers, upgradeable, uptime)
+import Customs (deb, spock)
+import Monitors (date, eno1, gpu, headphones, locks, memory, multiCoreTemp, multiCpu, speakers, uptime)
 import Xmobar
     ( Border (NoBorder)
     , Config
@@ -57,7 +57,7 @@ config =
         , commands = myCommands
         , sepChar = "%"
         , alignSep = "}{"
-        , template = "%XMonadLog% }{ %locks% %multicpu% %multicoretemp% %memory% %eno1% %gpu% %upgradeable% %speakers% %headphones% %uptime% %date%│%spock%"
+        , template = "%XMonadLog% }{%deb% %locks% %multicpu% %multicoretemp% %memory% %eno1% %gpu% %speakers% %headphones% %uptime% %date%│%spock%"
         , verbose = False
         }
 
@@ -70,12 +70,12 @@ myCommands =
     , Run locks
     , Run eno1
     , Run uptime
-    , Run upgradeable
     , Run gpu
     , Run speakers
     , Run headphones
     , Run XMonadLog
     , Run spock
+    , Run deb
     ]
 
 data ColorScheme = ColorScheme

@@ -1,4 +1,4 @@
-import Monitors (date, eno1, gpu, headphones, locks, memory, multiCoreTemp, multiCpu, speakers, upgradeable, uptime)
+import Monitors (date, eno1, gpu, headphones, locks, memory, multiCoreTemp, multiCpu, speakers, upgradeable, uptime, spock)
 import Xmobar
     ( Border (NoBorder)
     , Config
@@ -56,7 +56,7 @@ config =
         , commands = myCommands
         , sepChar = "%"
         , alignSep = "}{"
-        , template = "%XMonadLog% }{ %locks% %multicpu% %multicoretemp% %memory% %eno1% %gpu% %upgradeable% %speakers% %headphones% %uptime% %date%│<fn=1>\xf259</fn>"
+        , template = "%XMonadLog% }{ %locks% %multicpu% %multicoretemp% %memory% %eno1% %gpu% %upgradeable% %speakers% %headphones% %uptime% %date%│%spock%"
         , verbose = False
         }
 
@@ -74,6 +74,7 @@ myCommands =
     , Run speakers
     , Run headphones
     , Run XMonadLog
+    , Run spock
     ]
 
 data ColorScheme = ColorScheme

@@ -54,4 +54,4 @@ else
     color=$active_color
 fi
 
-echo "<fn=1>$icon</fn><fc=$color>$average</fc>"
+echo "<fn=2>$icon</fn><fc=$color>$average</fc>"

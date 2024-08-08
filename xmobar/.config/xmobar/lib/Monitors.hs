@@ -1,6 +1,7 @@
-module Monitors (multiCpu, memory, multiCoreTemp, date, locks, eno1, uptime, headphones, speakers, upgradeable, gpu) where
+module Monitors (multiCpu, memory, multiCoreTemp, date, locks, eno1, uptime, headphones, speakers, upgradeable, gpu, spock) where
 
-import Xmobar (Date (Date), Locks (Locks'), Monitors (Memory, MultiCoreTemp, MultiCpu, Network, Uptime), Command (Com))
+import Xmobar (Command (Com), Date (Date), Locks (Locks'), Monitors (Memory, MultiCoreTemp, MultiCpu, Network, Uptime))
+import Custom (ShowText (..))
 
 -- cpu and memory
 multiCpu :: Monitors
@@ -119,3 +120,6 @@ speakers = Com "/home/zink/.xmonad/scripts/get-volume.sh" ["speakers"] "speakers
 
 headphones :: Command
 headphones = Com "/home/zink/.xmonad/scripts/get-volume.sh" ["headphones"] "headphones" 20
+
+spock :: ShowText
+spock = ShowText "<fn=1>\xf259</fn>" "spock"

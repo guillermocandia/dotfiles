@@ -57,6 +57,7 @@ return {
         "pylsp", -- python
         "marksman", -- markdown
         "yamlls", -- yaml
+        "jsonls", -- json
       }
       for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup({

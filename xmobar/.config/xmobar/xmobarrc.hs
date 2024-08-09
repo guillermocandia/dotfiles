@@ -1,5 +1,8 @@
+{-# LANGUAGE LambdaCase #-}
+
 import Customs (deb, spock)
 import Monitors (date, eno1, gpu, headphones, locks, memory, multiCoreTemp, multiCpu, speakers, uptime)
+import System.Environment (getArgs)
 import Xmobar
     ( Border (NoBorder)
     , Config
@@ -27,22 +30,25 @@ import Xmobar
         )
     , Runnable (Run)
     , XMonadLog (XMonadLog)
-    , XPosition (Top)
+    , XPosition (OnScreen, Top)
     , defaultConfig
     , xmobar
     )
 
 main :: IO ()
-main = xmobar config
+main =
+    getArgs >>= \case
+        ["-x", n] -> xmobar . config $ read n
+        _ -> xmobar . config $ 0
 
-config :: Config
-config =
+config :: Int -> Config
+config n =
     defaultConfig
         { font = "Inconsolata Nerd Font Mono Bold 9"
         , additionalFonts = ["Inconsolata Nerd Font Mono Bold 18", "Noto Color Emoji Regular"]
         , bgColor = black myColorScheme
         , fgColor = cyan myColorScheme
-        , position = Top
+        , position = OnScreen n Top
         , textOffset = 0
         , border = NoBorder
         , borderColor = black myColorScheme
@@ -57,7 +63,7 @@ config =
         , commands = myCommands
         , sepChar = "%"
         , alignSep = "}{"
-        , template = "%XMonadLog% }{%deb% %locks% %multicpu% %multicoretemp% %memory% %eno1% %gpu% %speakers% %headphones% %uptime% %date%│%spock%"
+        , template = myTemplate n
         , verbose = False
         }
 
@@ -77,6 +83,28 @@ myCommands =
     , Run spock
     , Run deb
     ]
+
+myTemplate :: Int -> String
+myTemplate n = left ++ "}" ++ middle n ++ "{" ++ right n
+
+left :: String
+left = "%XMonadLog%"
+
+middle :: Int -> String
+middle n = concat $ replicate (n + 1) "%spock%"
+
+right :: Int -> String
+right n = r !! n >>= \c -> if c == ' ' then separator else pure c
+
+r :: [String]
+r =
+    [ "%locks% %speakers% %headphones% %uptime% %date%"
+    , "%multicpu% %multicoretemp% %memory% %gpu% %eno1% %date%"
+    , "%deb% %date%"
+    ]
+
+separator :: String
+separator = "┊"
 
 data ColorScheme = ColorScheme
     { black

@@ -1,45 +1,43 @@
-module Monitors (multiCpu, memory, multiCoreTemp, date, locks, eno1, uptime, headphones, speakers, gpu) where
+module Monitors (multiCpu, memory, multiCoreTemp, date, locks, eno1, uptime, disku, headphones, speakers, gpu, diskio) where
 
-import Xmobar (Command (Com), Date (Date), Locks (Locks'), Monitors (Memory, MultiCoreTemp, MultiCpu, Network, Uptime))
+import Xmobar (Command (Com), Date (Date), Locks (Locks'), Monitors (DiskIO, DiskU, Memory, MultiCoreTemp, MultiCpu, Network, Uptime))
 
 -- cpu and memory
 multiCpu :: Monitors
 multiCpu =
     MultiCpu
         [ "-t"
-        , "<autototal>"
+        , "<fn=1>\xf4bc</fn> <autototal>"
         , "--ppad"
         , "2"
         , "--padchars"
         , "0"
-        , "--Low"
-        , "40"
         , "--High"
         , "80"
-        , "--low"
-        , "lightcyan"
-        , "--normal"
-        , "cyan"
-        , "--high"
-        , "red"
+        -- , "--low"
+        -- , "lightcyan"
+        -- , "--normal"
+        -- , "cyan"
+        -- , "--high"
+        -- , "red"
         ]
-        50
+        10
 
 multiCoreTemp :: Monitors
 multiCoreTemp =
     MultiCoreTemp
         [ "--template"
-        , "<avg>"
+        , "<fn=1>\xf2c9</fn> <avg><fn=1>\xf0504</fn>"
         , "--Low"
         , "40"
         , "--High"
         , "80"
-        , "--low"
-        , "lightcyan"
-        , "--normal"
-        , "cyan"
-        , "--high"
-        , "red"
+        -- , "--low"
+        -- , "lightcyan"
+        -- , "--normal"
+        -- , "cyan"
+        -- , "--high"
+        -- , "red"
         ]
         10
 
@@ -47,36 +45,54 @@ memory :: Monitors
 memory =
     Memory
         [ "--template"
-        , "<usedratio>%"
+        , "<fn=1>\xefc5</fn> <usedratio>%"
         , "--Low"
         , "20"
         , "--High"
         , "80"
-        , "--low"
-        , "lightcyan"
-        , "--normal"
-        , "cyan"
-        , "--high"
-        , "red"
+        -- , "--low"
+        -- , "lightcyan"
+        -- , "--normal"
+        -- , "cyan"
+        -- , "--high"
+        -- , "red",
         ]
-        50
+        (10 * 2)
 
 -- date
 date :: Date
-date = Date "%X %d-%m-%Y" "date" 10
+date = Date "<fn=1>\xf0954</fn> %X <fn=1>\xf073</fn> %d-%m-%Y" "date" 10
 
--- disks
--- DiskU
---         [("/", "<fn=1>🗄</fn>/:<free>"), ("/home", "/home:<free>")]
---         ["-L", "20", "-H", "50", "-m", "1", "-p", "3"]
---         50
+-- disk use
+disku :: Monitors
+disku =
+    DiskU
+        [ ("/", "<fn=1>\xf02ca</fn> /:<free>/<size>")
+        , ("/home", "/home:<free>/<size>")
+        ]
+        []
+        (10 * 10)
+
+-- disk io
+diskio :: Monitors
+diskio =
+    DiskIO
+        [ ("/", "<fn=1>\xf02ca</fn> /:<read>/<write>")
+        , ("/home", "/home:<read>/<write>")
+        ]
+        [ "--minwidth"
+        , "4"
+        , "--suffix"
+        , "True"
+        ]
+        (10 * 2)
 
 -- locks
 locks :: Locks
 locks =
     Locks'
-        [ ("CAPS", ("<fc=#00ff00>\xf023</fc>", "<fc=#777777>\xf09c</fc>"))
-        , ("NUM", ("<fc=#777777>\xf047</fc>", "<fc=#00ff00>\xf047</fc>"))
+        [ ("CAPS", ("<fn=1>\xf100d</fn>", "<fn=1>\xf002c</fn>"))
+        , ("NUM", ("<fn=1>\xf03a0</fn>", "<fn=1>\xf19d3</fn>"))
         , ("SCROLL", ("SlOCK", ""))
         ]
 
@@ -86,24 +102,26 @@ eno1 =
     Network
         "eno1"
         [ "--template"
-        , "<fn=1>⬇</fn><fc=cyan><rx></fc><fn=1>⬆</fn><fc=cyan><tx></fc>"
+        , "<fn=1>\xf0c66</fn><rx> <fn=1>\xf0cd8</fn><tx>"
         , "--suffix"
         , "True"
         , "--width"
         , "7"
         ]
-        20
+        (10 * 2)
 
 -- others
 uptime :: Monitors
 uptime =
     Uptime
         [ "--template"
-        , "<days>d<hours>h<minutes>m<seconds>s"
+        , "<fn=1>\xf1ae0</fn> <days>:<hours>:<minutes>:<seconds>"
         , "--suffix"
         , "False"
         , "--minwidth"
         , "2"
+        , "--padchars"
+        , "0"
         ]
         10
 
@@ -116,5 +134,3 @@ speakers = Com "/home/zink/.xmonad/scripts/get-volume.sh" ["speakers"] "speakers
 
 headphones :: Command
 headphones = Com "/home/zink/.xmonad/scripts/get-volume.sh" ["headphones"] "headphones" 20
-
-

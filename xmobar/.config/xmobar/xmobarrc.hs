@@ -1,7 +1,7 @@
 {-# LANGUAGE LambdaCase #-}
 
 import Customs (deb, spock)
-import Monitors (date, eno1, gpu, headphones, locks, memory, multiCoreTemp, multiCpu, speakers, uptime)
+import Monitors (date, diskio, disku, eno1, gpu, headphones, locks, memory, multiCoreTemp, multiCpu, speakers, uptime)
 import System.Environment (getArgs)
 import Xmobar
     ( Border (NoBorder)
@@ -30,7 +30,7 @@ import Xmobar
         )
     , Runnable (Run)
     , XMonadLog (XPropertyLog)
-    , XPosition (OnScreen, Top)
+    , XPosition (OnScreen, TopH)
     , defaultConfig
     , xmobar
     )
@@ -44,11 +44,11 @@ main =
 config :: Int -> Config
 config n =
     defaultConfig
-        { font = "Inconsolata Nerd Font Mono Bold 9"
+        { font = "Inconsolata Nerd Font Mono Bold 11"
         , additionalFonts = ["Inconsolata Nerd Font Mono Bold 18", "Noto Color Emoji Regular"]
         , bgColor = black myColorScheme
         , fgColor = cyan myColorScheme
-        , position = OnScreen n Top
+        , position = OnScreen n $ TopH 18
         , textOffset = 0
         , border = NoBorder
         , borderColor = black myColorScheme
@@ -72,6 +72,8 @@ myCommands =
     [ Run multiCpu
     , Run multiCoreTemp
     , Run memory
+    , Run disku
+    , Run diskio
     , Run date
     , Run locks
     , Run eno1
@@ -103,13 +105,15 @@ right n = r !! n >>= \c -> if c == ' ' then separator else pure c
 
 r :: [String]
 r =
-    [ "%locks% %speakers% %headphones% %uptime% %date%"
-    , "%multicpu% %multicoretemp% %memory% %gpu% %eno1% %date%"
-    , "%deb% %date%"
+    [ "%locks% %uptime% %speakers% %headphones% %date% "
+    , "%multicpu% %multicoretemp% %memory% %date% "
+    , "%diskio% %disku% %eno1% <fn=1>\xf0028</fn> %deb% %date% "
     ]
 
+-- unused %gpu
+
 separator :: String
-separator = "┊"
+separator = " "
 
 data ColorScheme = ColorScheme
     { black

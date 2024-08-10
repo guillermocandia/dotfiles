@@ -2,7 +2,6 @@
 
 * TODO: theme for xmobar, convert colorscheme to module
 * TODO: xmobar conf
-* TODO: increase xmobar intervals
 * TODO: pipes for audio, button to update xmobar
 * TODO: user startuphook to create pipes
 * TODO: search new layouts, conf, change names

@@ -29,7 +29,7 @@ import Xmobar
         , verbose
         )
     , Runnable (Run)
-    , XMonadLog (XMonadLog)
+    , XMonadLog (XPropertyLog)
     , XPosition (OnScreen, Top)
     , defaultConfig
     , xmobar
@@ -79,16 +79,21 @@ myCommands =
     , Run gpu
     , Run speakers
     , Run headphones
-    , Run XMonadLog
+    , Run $ XPropertyLog "_XMONAD_LOG_1"
+    , Run $ XPropertyLog "_XMONAD_LOG_2"
+    , Run $ XPropertyLog "_XMONAD_LOG_3"
     , Run spock
     , Run deb
     ]
 
 myTemplate :: Int -> String
-myTemplate n = left ++ "}" ++ middle n ++ "{" ++ right n
+myTemplate n = left n ++ "}" ++ middle n ++ "{" ++ right n
 
-left :: String
-left = "%XMonadLog%"
+left :: Int -> String
+left 0 = "%_XMONAD_LOG_1%"
+left 1 = "%_XMONAD_LOG_2%"
+left 2 = "%_XMONAD_LOG_3%"
+left _ = undefined
 
 middle :: Int -> String
 middle n = concat $ replicate (n + 1) "%spock%"

@@ -1,13 +1,8 @@
--- {-# OPTIONS_GHC -Wno-deferred-type-errors #-}
--- {-# OPTIONS_GHC -Wno-incomplete-uni-patterns #-}
-
--- {-# OPTIONS_GHC -Wno-missing-signatures #-}
--- {-# OPTIONS_GHC -Wno-type-defaults #-}
-
 import XMonad
     ( Default (def)
     , Full (Full)
     , Mirror (Mirror)
+    , ScreenId (S)
     , Tall (Tall)
     , XConfig (focusedBorderColor, layoutHook, modMask, workspaces)
     , mod4Mask
@@ -21,7 +16,7 @@ import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
 import XMonad.Hooks.ManageDocks (avoidStruts)
 import XMonad.Hooks.StatusBar
     ( defToggleStrutsKey
-    , statusBarProp
+    , statusBarPropTo
     , withEasySB
     )
 import XMonad.Hooks.StatusBar.PP
@@ -43,19 +38,28 @@ import XMonad.Hooks.StatusBar.PP
     , xmobarRaw
     , xmobarStrip
     )
+import XMonad.Layout.IndependentScreens (marshallPP)
 import XMonad.Layout.Magnifier (magnifiercz')
 import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Layout.ThreeColumns (ThreeCol (ThreeColMid))
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (additionalKeysP)
-import XMonad.Util.Loggers (logTitles)
+import XMonad.Util.Loggers (logTitlesOnScreen)
 
 main =
     xmonad
         . ewmhFullscreen
         . ewmh
-        . withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) defToggleStrutsKey
+        . withEasySB myStatusBar defToggleStrutsKey
         $ myConfig
+
+myStatusBar = xmobar0 <> xmobar1 <> xmobar2
+
+xmobar0 = statusBarPropTo "_XMONAD_LOG_1" "xmobar -x 0" $ pure (myXmobarPP 0)
+
+xmobar1 = statusBarPropTo "_XMONAD_LOG_2" "xmobar -x 1" $ pure (myXmobarPP 1)
+
+xmobar2 = statusBarPropTo "_XMONAD_LOG_3" "xmobar -x 2" $ pure (myXmobarPP 2)
 
 myConfig =
     def
@@ -100,8 +104,8 @@ myKeys =
                 ]
            ]
 
-myXmobarPP :: PP
-myXmobarPP =
+myXmobarPP :: Int -> PP
+myXmobarPP n =
     def
         { ppCurrent = current . wrap " " " "
         , ppVisible = visible . wrap " " " "
@@ -112,7 +116,7 @@ myXmobarPP =
         , ppSep = " "
         , ppWsSep = ""
         , ppOrder = \[ws, l, _, wins] -> [ws, l, wins]
-        , ppExtras = [logTitles formatFocused formatUnfocused]
+        , ppExtras = [logTitlesOnScreen (S n) formatFocused formatUnfocused]
         }
     where
         formatFocused = current . wrap "[" "]" . ppWindow

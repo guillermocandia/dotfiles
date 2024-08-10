@@ -44,7 +44,7 @@ import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Layout.ThreeColumns (ThreeCol (ThreeColMid))
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (additionalKeysP)
-import XMonad.Util.Loggers (logTitlesOnScreen)
+import XMonad.Util.Loggers (logLayoutOnScreen, logTitlesOnScreen, xmobarColorL)
 
 main =
     xmonad
@@ -115,14 +115,14 @@ myXmobarPP n =
         , ppTitleSanitize = xmobarStrip
         , ppSep = " "
         , ppWsSep = ""
-        , ppOrder = \[ws, l, _, wins] -> [ws, l, wins]
-        , ppExtras = [logTitlesOnScreen (S n) formatFocused formatUnfocused]
+        , ppOrder = \[ws, _, _, wins, layout] -> [ws, layout, wins]
+        , ppExtras = [titles, layout]
         }
     where
+        titles = logTitlesOnScreen (S n) formatFocused formatUnfocused
+        layout = xmobarColorL (black myColorScheme) (blue myColorScheme) $ logLayoutOnScreen (S n)
         formatFocused = current . wrap "[" "]" . ppWindow
-
         formatUnfocused = hiddenNoWindows . wrap "[" "]" . ppWindow
-
         ppWindow :: String -> String
         ppWindow = xmobarRaw . (\w -> if null w then "untitled" else w) . shorten 30
 

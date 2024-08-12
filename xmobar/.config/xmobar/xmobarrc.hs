@@ -1,7 +1,7 @@
 {-# LANGUAGE LambdaCase #-}
 
-import Customs (deb, spock)
-import Monitors (date, diskio, disku, eno1, gpu, headphones, locks, memory, multiCoreTemp, multiCpu, speakers, uptime)
+import Customs (deb, headphones, speakers, spock)
+import Monitors (date, diskio, disku, eno1, gpu, locks, memory, multiCoreTemp, multiCpu, uptime)
 import System.Environment (getArgs)
 import Xmobar
     ( Border (NoBorder)
@@ -86,6 +86,7 @@ myCommands =
     , Run $ XPropertyLog "_XMONAD_LOG_3"
     , Run spock
     , Run deb
+    -- , Run vol
     ]
 
 myTemplate :: Int -> String

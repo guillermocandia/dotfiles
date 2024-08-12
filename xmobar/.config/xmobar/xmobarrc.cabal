@@ -14,6 +14,7 @@ library
       Customs
       Customs.DebianUpdates
       Customs.ShowText
+      Customs.Volume
       Monitors
   other-modules:
       Paths_xmobarrc

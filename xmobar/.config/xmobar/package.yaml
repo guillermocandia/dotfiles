@@ -4,6 +4,7 @@ description: My custom xmobarrc
 dependencies:
   - base >= 4.7 && < 5
   - process
+  # - unix
   - xmobar
 ghc-options:
   - -Wall

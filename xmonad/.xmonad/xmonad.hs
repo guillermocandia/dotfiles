@@ -38,7 +38,6 @@ import XMonad.Hooks.StatusBar.PP
     , xmobarRaw
     , xmobarStrip
     )
-import XMonad.Layout.IndependentScreens (marshallPP)
 import XMonad.Layout.Magnifier (magnifiercz')
 import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Layout.ThreeColumns (ThreeCol (ThreeColMid))
@@ -115,7 +114,7 @@ myXmobarPP n =
         , ppTitleSanitize = xmobarStrip
         , ppSep = " "
         , ppWsSep = ""
-        , ppOrder = \[ws, _, _, wins, layout] -> [ws, layout, wins]
+        , ppOrder = \[ws, _, _, wins, l] -> [ws, l, wins]
         , ppExtras = [titles, layout]
         }
     where

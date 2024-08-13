@@ -1,6 +1,19 @@
 {-# LANGUAGE BlockArguments #-}
 {-# LANGUAGE LambdaCase #-}
 
+import ColorScheme
+    ( ColorScheme
+        ( black
+        -- , blue
+        , cyan
+        -- , green
+        , magenta
+        -- , red
+        -- , white
+        -- , yellow
+        )
+    , myColorScheme
+    )
 import Customs (deb, headphones, speakers, spock)
 import Monitors (date, diskio, disku, eno1, gpu, locks, memory, multiCoreTemp, multiCpu, top, uptime)
 import System.Environment (getArgs)
@@ -47,12 +60,12 @@ config n =
     defaultConfig
         { font = "Inconsolata Nerd Font Mono Bold 10"
         , additionalFonts = ["Inconsolata Nerd Font Mono Bold 18", "Noto Color Emoji Regular"]
-        , bgColor = black myColorScheme
-        , fgColor = cyan myColorScheme
+        , bgColor = black ColorScheme.myColorScheme
+        , fgColor = cyan ColorScheme.myColorScheme
         , position = OnScreen n $ TopH 18
         , textOffset = 0
         , border = NoBorder
-        , borderColor = black myColorScheme
+        , borderColor = black ColorScheme.myColorScheme
         , borderWidth = 0
         , alpha = 255
         , hideOnStart = False
@@ -117,29 +130,4 @@ right n =
 -- unused %gpu
 
 separator :: String
-separator = "<fn=0><fc=" ++ magenta myColorScheme ++ "," ++ black myColorScheme ++ "> ┊ </fc></fn>"
-
-data ColorScheme = ColorScheme
-    { black
-      , red
-      , green
-      , yellow
-      , blue
-      , magenta
-      , cyan
-      , white
-        :: String
-    }
-
-myColorScheme :: ColorScheme
-myColorScheme =
-    ColorScheme
-        { black = "#3b4252"
-        , red = "#bf616a"
-        , green = "#a3be8c"
-        , yellow = "#ebcb8b"
-        , blue = "#81a1c1"
-        , magenta = "#b48ead"
-        , cyan = "#88c0d0"
-        , white = "#e5e9f0"
-        }
+separator = "<fn=0><fc=" ++ magenta ColorScheme.myColorScheme ++ "," ++ black ColorScheme.myColorScheme ++ "> ┊ </fc></fn>"

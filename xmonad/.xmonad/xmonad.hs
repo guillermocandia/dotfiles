@@ -1,3 +1,16 @@
+import ColorScheme
+    ( ColorScheme
+        ( black
+        , blue
+        , cyan
+        , green
+        , magenta
+        , red
+        , white
+        , yellow
+        )
+    , myColorScheme
+    )
 import XMonad
     ( Default (def)
     , Full (Full)
@@ -134,28 +147,3 @@ myXmobarPP n =
         wsSep = xmobarColor (black myColorScheme) (black myColorScheme)
         urgentYellow = xmobarColor (yellow myColorScheme) ""
         urgentRed = xmobarColor (red myColorScheme) ""
-
-data ColorScheme = ColorScheme
-    { black
-      , red
-      , green
-      , yellow
-      , blue
-      , magenta
-      , cyan
-      , white
-        :: String
-    }
-
-myColorScheme :: ColorScheme
-myColorScheme =
-    ColorScheme
-        { black = "#3b4252"
-        , red = "#bf616a"
-        , green = "#a3be8c"
-        , yellow = "#ebcb8b"
-        , blue = "#81a1c1"
-        , magenta = "#b48ead"
-        , cyan = "#88c0d0"
-        , white = "#e5e9f0"
-        }

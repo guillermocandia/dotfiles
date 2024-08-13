@@ -6,6 +6,7 @@ packages:
 
 extra-deps:
 - xmobar-0.48.1
+- ../../../haskell/mylib/
 
 flags:
  xmobar:

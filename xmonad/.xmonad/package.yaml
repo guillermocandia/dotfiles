@@ -1,11 +1,7 @@
-name: xmobarrc
+name: myxmonad
 version: 0.1.0.0
-description: My custom xmobarrc
 dependencies:
   - base >= 4.7 && < 5
-  - process
-  - split
-  - xmobar
   - mylib
 ghc-options:
   - -Wall
@@ -18,13 +14,4 @@ ghc-options:
   - -Wpartial-fields
   - -Wredundant-constraints
 library:
-  source-dirs: lib
-executables:
-  xmobar:
-    main: xmobarrc.hs
-    ghc-options:
-      - -threaded
-      - -rtsopts
-      - -with-rtsopts=-N
-    dependencies:
-      - xmobarrc
+  source-dirs: .

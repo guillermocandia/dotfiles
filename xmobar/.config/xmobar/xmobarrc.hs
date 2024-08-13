@@ -1,7 +1,7 @@
 {-# LANGUAGE LambdaCase #-}
 
 import Customs (deb, headphones, speakers, spock)
-import Monitors (date, diskio, disku, eno1, gpu, locks, memory, multiCoreTemp, multiCpu, uptime)
+import Monitors (date, diskio, disku, eno1, gpu, locks, memory, multiCoreTemp, multiCpu, top, uptime)
 import System.Environment (getArgs)
 import Xmobar
     ( Border (NoBorder)
@@ -86,7 +86,7 @@ myCommands =
     , Run $ XPropertyLog "_XMONAD_LOG_3"
     , Run spock
     , Run deb
-    -- , Run vol
+    , Run top
     ]
 
 myTemplate :: Int -> String
@@ -99,7 +99,8 @@ left 2 = "%_XMONAD_LOG_3%"
 left _ = undefined
 
 middle :: Int -> String
-middle n = concat $ replicate (n + 1) "%spock%"
+middle 0 = "%spock%"
+middle _ = ""
 
 right :: Int -> String
 right n = r !! n >>= \c -> if c == ' ' then separator else pure c
@@ -108,7 +109,7 @@ r :: [String]
 r =
     [ "%locks% %uptime% %speakers% %headphones% %date% "
     , "%multicpu% %multicoretemp% %memory% %date% "
-    , "%diskio% %disku% %eno1% %deb% %date% "
+    , "%top% %diskio% %disku% %eno1% %deb% %date% "
     ]
 
 -- unused %gpu

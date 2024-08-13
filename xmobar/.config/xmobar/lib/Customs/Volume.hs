@@ -16,7 +16,6 @@ instance Exec Volume where
     alias (Volume device _ _ _ _) = device
     start (Volume device iconOn iconOff colorOn colorOff) cb = do
         formatVolume (getVolume device) iconOn iconOff colorOn colorOff >>= cb
-        print shellCommand
         (_, Just hout, _, _) <- createProcess (shell shellCommand) {std_out = CreatePipe}
         hSetBuffering hout LineBuffering
 

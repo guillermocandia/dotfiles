@@ -1,6 +1,6 @@
-module Monitors (multiCpu, memory, multiCoreTemp, date, locks, eno1, uptime, disku, gpu, diskio) where
+module Monitors (multiCpu, memory, multiCoreTemp, date, locks, eno1, uptime, disku, gpu, diskio, top) where
 
-import Xmobar (Command (Com), Date (Date), Locks (Locks'), Monitors (DiskIO, DiskU, Memory, MultiCoreTemp, MultiCpu, Network, Uptime))
+import Xmobar (Command (Com), Date (Date), Locks (Locks'), Monitors (DiskIO, DiskU, Memory, MultiCoreTemp, MultiCpu, Network, TopProc, Uptime))
 
 -- cpu and memory
 multiCpu :: Monitors
@@ -86,6 +86,19 @@ diskio =
         , "True"
         ]
         (10 * 2)
+
+-- load
+top :: Monitors
+top =
+    TopProc
+        [ "--template"
+        , "<fn=1>\xf05a1</fn> <both1> <mboth1>"
+        , "--width"
+        , "20"
+        , "--suffix"
+        , "True"
+        ]
+        (10 * 5)
 
 -- locks
 locks :: Locks

@@ -11,7 +11,7 @@ import XMonad
     , xmonad
     , (|||)
     )
-import XMonad.Hooks.DynamicLog (xmobarColor)
+import XMonad.Hooks.DynamicLog (xmobarBorder, xmobarColor)
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
 import XMonad.Hooks.ManageDocks (avoidStruts)
 import XMonad.Hooks.StatusBar
@@ -120,15 +120,15 @@ myXmobarPP n =
     where
         titles = logTitlesOnScreen (S n) formatFocused formatUnfocused
         layout = xmobarColorL (black myColorScheme) (blue myColorScheme) $ logLayoutOnScreen (S n)
-        formatFocused = current . wrap "[" "]" . ppWindow
+        formatFocused = xmobarColor (black myColorScheme) (cyan myColorScheme) . wrap "[" "]" . ppWindow
         formatUnfocused = hiddenNoWindows . wrap "[" "]" . ppWindow
         ppWindow :: String -> String
         ppWindow = xmobarRaw . (\w -> if null w then "untitled" else w) . shorten 30
 
         urgentRed, urgentYellow, current, visible, hidden, hiddenNoWindows, wsSep :: String -> String
-        current = xmobarColor (black myColorScheme) (cyan myColorScheme)
-        visible = xmobarColor (black myColorScheme) (blue myColorScheme)
-        hidden = xmobarColor (cyan myColorScheme) (black myColorScheme)
+        current = xmobarColor (black myColorScheme) (cyan myColorScheme) . xmobarBorder "Top" (magenta myColorScheme) 2
+        visible = xmobarColor (black myColorScheme) (blue myColorScheme) . xmobarBorder "Top" (magenta myColorScheme) 2
+        hidden = xmobarColor (cyan myColorScheme) (black myColorScheme) . xmobarBorder "Top" (magenta myColorScheme) 2
         hiddenNoWindows = xmobarColor (blue myColorScheme) (black myColorScheme)
 
         wsSep = xmobarColor (black myColorScheme) (black myColorScheme)

@@ -45,17 +45,20 @@ memory :: Monitors
 memory =
     Memory
         [ "--template"
-        , "<fn=1>\xefc5</fn> <usedratio>%"
+        , "<fn=1>\xefc5</fn> <used>Gb"
         , "--Low"
         , "20"
         , "--High"
         , "80"
-        -- , "--low"
-        -- , "lightcyan"
-        -- , "--normal"
-        -- , "cyan"
-        -- , "--high"
-        -- , "red",
+        , -- , "--low"
+          -- , "lightcyan"
+          -- , "--normal"
+          -- , "cyan"
+          -- , "--high"
+          -- , "red",
+          "--"
+        , "--scale"
+        , "1024"
         ]
         (10 * 2)
 

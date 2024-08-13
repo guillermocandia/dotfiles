@@ -1,3 +1,4 @@
+{-# LANGUAGE BlockArguments #-}
 {-# LANGUAGE LambdaCase #-}
 
 import Customs (deb, headphones, speakers, spock)
@@ -44,7 +45,7 @@ main =
 config :: Int -> Config
 config n =
     defaultConfig
-        { font = "Inconsolata Nerd Font Mono Bold 11"
+        { font = "Inconsolata Nerd Font Mono Bold 10"
         , additionalFonts = ["Inconsolata Nerd Font Mono Bold 18", "Noto Color Emoji Regular"]
         , bgColor = black myColorScheme
         , fgColor = cyan myColorScheme
@@ -96,26 +97,27 @@ left :: Int -> String
 left 0 = "%_XMONAD_LOG_1%"
 left 1 = "%_XMONAD_LOG_2%"
 left 2 = "%_XMONAD_LOG_3%"
-left _ = undefined
+left _ = ""
 
 middle :: Int -> String
 middle 0 = "%spock%"
 middle _ = ""
 
 right :: Int -> String
-right n = r !! n >>= \c -> if c == ' ' then separator else pure c
-
-r :: [String]
-r =
-    [ "%locks% %uptime% %speakers% %headphones% %date% "
-    , "%multicpu% %multicoretemp% %memory% %date% "
-    , "%top% %diskio% %disku% %eno1% %deb% %date% "
-    ]
+-- right n = r !! n >>= \c -> if c == ' ' then separator else pure c
+right n =
+    ( case n of
+        0 -> "%locks%-%uptime%-%speakers% %headphones%-%date% "
+        1 -> "%multicpu%-%multicoretemp%-%memory%-%date% "
+        2 -> "%top%-%diskio%-%disku%-%eno1%-%deb%-%date% "
+        _ -> ""
+    )
+        >>= \c -> if c == '-' then separator else pure c
 
 -- unused %gpu
 
 separator :: String
-separator = " "
+separator = "<fn=0><fc=" ++ magenta myColorScheme ++ "," ++ black myColorScheme ++ "> ┊ </fc></fn>"
 
 data ColorScheme = ColorScheme
     { black

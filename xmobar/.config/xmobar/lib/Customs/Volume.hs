@@ -3,6 +3,7 @@
 module Customs.Volume (Volume (..)) where
 
 import Control.Monad (forever)
+import Data.List.Split (splitOn)
 import System.IO (BufferMode (LineBuffering), hGetLine, hSetBuffering)
 import System.Process (StdStream (CreatePipe), createProcess, readProcess, shell, std_out)
 import Xmobar (Exec (start), alias)
@@ -13,26 +14,36 @@ data Volume where
 
 instance Exec Volume where
     alias (Volume device _ _ _ _) = device
-    start (Volume device iconOff iconOn colorOff colorOn) cb = do
+    start (Volume device iconOn iconOff colorOn colorOff) cb = do
+        formatVolume (getVolume device) iconOn iconOff colorOn colorOff >>= cb
         print shellCommand
         (_, Just hout, _, _) <- createProcess (shell shellCommand) {std_out = CreatePipe}
         hSetBuffering hout LineBuffering
 
         forever $ do
-            formatVolume (getVolume (hGetLine hout)) >>= cb
+            _ <- hGetLine hout
+            formatVolume (getVolume device) iconOn iconOff colorOn colorOff >>= cb
         where
             shellCommand = "pactl subscribe|grep --line-buffered \"sink #" ++ sink ++ "\""
             sink = case device of
                 "headphones" -> "0"
                 "speakers" -> "1"
                 _ -> undefined
-            getVolume :: IO String -> IO String
-            getVolume hout = do
-                _ <- hout
-                readProcess "get-volume" [device] ""
 
-formatVolume :: IO String -> IO String
-formatVolume hout = do
-    s <- hout
-    let r = concat $ replicate 1 s
-    return r
+getVolume :: String -> IO String
+getVolume device = readProcess "get-volume" [device] ""
+
+formatVolume :: IO String -> String -> String -> String -> String -> IO String
+formatVolume io iconOn iconOff colorOn colorOff = do
+    s <- io
+    let l = splitOn " " s
+    let volume = head l
+    let mute = l !! 1
+    let (icon, color) = case mute of
+            "0" -> (iconOn, colorOn)
+            "1" -> (iconOff, colorOff)
+            [] -> ("", "")
+            _ -> ("error", "error")
+    let tag = "<fc=" ++ color ++ ">"
+    let endtag = "</fc>"
+    return $ icon ++ tag ++ volume ++ endtag

@@ -1,4 +1,4 @@
-module Monitors (multiCpu, memory, multiCoreTemp, date, locks, eno1, uptime, disku, headphones, speakers, gpu, diskio) where
+module Monitors (multiCpu, memory, multiCoreTemp, date, locks, eno1, uptime, disku, gpu, diskio) where
 
 import Xmobar (Command (Com), Date (Date), Locks (Locks'), Monitors (DiskIO, DiskU, Memory, MultiCoreTemp, MultiCpu, Network, Uptime))
 
@@ -128,9 +128,3 @@ uptime =
 -- customs
 gpu :: Command
 gpu = Com "/home/zink/.xmonad/scripts/get-gpu.sh" [] "gpu" 50
-
-speakers :: Command
-speakers = Com "/home/zink/.xmonad/scripts/get-volume.sh" ["speakers"] "speakers" 20
-
-headphones :: Command
-headphones = Com "/home/zink/.xmonad/scripts/get-volume.sh" ["headphones"] "headphones" 20

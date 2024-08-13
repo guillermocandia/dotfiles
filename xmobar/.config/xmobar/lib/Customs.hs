@@ -11,7 +11,7 @@ deb :: DebianUpdates
 deb = DebianUpdates (10 * 60 * 10)
 
 speakers :: Volume
-speakers = Volume "speakers" "a" "a" "a" "a"
+speakers = Volume "speakers" "<fn=1>\xf04c3</fn> " "<fn=1>\xf04c4</fn> " "green" "red"
 
 headphones :: Volume
-headphones = Volume "headphones" "a" "a" "a" "a"
+headphones = Volume "headphones" "<fn=1>\xf02cb</fn> " "<fn=1>\xf07ce</fn> " "green" "red"

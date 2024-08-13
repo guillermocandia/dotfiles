@@ -108,7 +108,7 @@ r :: [String]
 r =
     [ "%locks% %uptime% %speakers% %headphones% %date% "
     , "%multicpu% %multicoretemp% %memory% %date% "
-    , "%diskio% %disku% %eno1% <fn=1>\xf0028</fn> %deb% %date% "
+    , "%diskio% %disku% %eno1% %deb% %date% "
     ]
 
 -- unused %gpu

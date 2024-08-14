@@ -1,5 +1,6 @@
 module Monitors (multiCpu, memory, multiCoreTemp, date, locks, eno1, uptime, disku, gpu, diskio, top) where
 
+import ColorScheme (ColorScheme (red, green, yellow), myColorScheme)
 import Xmobar (Command (Com), Date (Date), Locks (Locks'), Monitors (DiskIO, DiskU, Memory, MultiCoreTemp, MultiCpu, Network, TopProc, Uptime))
 
 -- cpu and memory
@@ -12,14 +13,16 @@ multiCpu =
         , "2"
         , "--padchars"
         , "0"
+        , "--Low"
+        , "40"
         , "--High"
         , "80"
-        -- , "--low"
-        -- , "lightcyan"
-        -- , "--normal"
-        -- , "cyan"
-        -- , "--high"
-        -- , "red"
+        , "--low"
+        , green myColorScheme
+        , "--normal"
+        , yellow myColorScheme
+        , "--high"
+        , red myColorScheme
         ]
         10
 
@@ -32,12 +35,12 @@ multiCoreTemp =
         , "40"
         , "--High"
         , "80"
-        -- , "--low"
-        -- , "lightcyan"
-        -- , "--normal"
-        -- , "cyan"
-        -- , "--high"
-        -- , "red"
+        , "--low"
+        , green myColorScheme
+        , "--normal"
+        , yellow myColorScheme
+        , "--high"
+        , red myColorScheme
         ]
         10
 
@@ -50,13 +53,13 @@ memory =
         , "20"
         , "--High"
         , "80"
-        , -- , "--low"
-          -- , "lightcyan"
-          -- , "--normal"
-          -- , "cyan"
-          -- , "--high"
-          -- , "red",
-          "--"
+        , "--low"
+        , green myColorScheme
+        , "--normal"
+        , yellow myColorScheme
+        , "--high"
+        , red myColorScheme
+        , "--"
         , "--scale"
         , "1024"
         ]
@@ -107,8 +110,8 @@ top =
 locks :: Locks
 locks =
     Locks'
-        [ ("CAPS", ("<fn=1>\xf100d</fn>", "<fn=1>\xf002c</fn>"))
-        , ("NUM", ("<fn=1>\xf03a0</fn>", "<fn=1>\xf19d3</fn>"))
+        [ ("CAPS", ("<fc=" ++yellow myColorScheme ++ "><fn=1>\xf100d</fn>", "<fn=1>\xf002c</fn>"))
+        , ("NUM", ("<fc=" ++yellow myColorScheme ++ "><fn=1>\xf03a0</fn></fc>", "<fn=1>\xf19d3</fn>"))
         , ("SCROLL", ("SlOCK", ""))
         ]
 

@@ -11,15 +11,17 @@ import ColorScheme
         )
     , myColorScheme
     )
+import Data.Maybe (Maybe (Just))
 import XMonad
     ( Default (def)
     , Full (Full)
     , Mirror (Mirror)
     , ScreenId (S)
     , Tall (Tall)
-    , XConfig (focusedBorderColor, layoutHook, modMask, workspaces)
+    , XConfig (borderWidth, focusFollowsMouse, focusedBorderColor, layoutHook, modMask, normalBorderColor, workspaces)
     , mod4Mask
     , spawn
+    , terminal
     , windows
     , xmonad
     , (|||)
@@ -43,6 +45,7 @@ import XMonad.Hooks.StatusBar.PP
         , ppTitleSanitize
         , ppUrgent
         , ppVisible
+        , ppVisibleNoWindows
         , ppWsSep
         )
     , shorten
@@ -51,9 +54,12 @@ import XMonad.Hooks.StatusBar.PP
     , xmobarRaw
     , xmobarStrip
     )
-import XMonad.Layout.Magnifier (magnifiercz')
-import XMonad.Layout.NoBorders (noBorders)
-import XMonad.Layout.ThreeColumns (ThreeCol (ThreeColMid))
+import XMonad.Layout.CircleEx (CircleEx (CircleEx, cDelta), circleEx)
+import XMonad.Layout.Grid (Grid (Grid))
+import XMonad.Layout.NoBorders (smartBorders)
+import XMonad.Layout.OneBig (OneBig (OneBig))
+import XMonad.Layout.Renamed (Rename (Replace), renamed)
+import XMonad.Prelude (Bool (True))
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Loggers (logLayoutOnScreen, logTitlesOnScreen, xmobarColorL)
@@ -76,36 +82,44 @@ xmobar2 = statusBarPropTo "_XMONAD_LOG_3" "xmobar -x 2" $ pure (myXmobarPP 2)
 myConfig =
     def
         { modMask = mod4Mask
-        , layoutHook = myLayout
         , workspaces = myWorkspaces
-        , focusedBorderColor = "cyan"
+        , terminal = "alacritty"
+        , layoutHook = myLayout
+        , normalBorderColor = black myColorScheme
+        , focusedBorderColor = cyan myColorScheme
+        , borderWidth = 1
+        , focusFollowsMouse = True
         }
         `additionalKeysP` myKeys
 
 myLayout =
-    avoidStruts . noBorders $ tiled ||| Mirror tiled ||| Full ||| threeCol
+    avoidStruts . smartBorders $ grid ||| column ||| row ||| full ||| circle ||| onebig
     where
-        threeCol = magnifiercz' 1.3 $ ThreeColMid nmaster delta ratio
-        tiled = Tall nmaster delta ratio
-        nmaster = 1 -- Default number of windows in the master pane
-        ratio = 1 / 2 -- Default proportion of screen occupied by master pane
-        delta = 3 / 100 -- Percent of screen to increment by when resizing panes
+        grid = renamed [Replace "grid"] Grid
+        column =
+            renamed [Replace "column"] $
+                Tall 0 (1 / 2) (3 / 100)
+        row =
+            renamed [Replace "row"] $
+                Mirror column
+        full = renamed [Replace "full"] Full
+        circle = renamed [Replace "circle"] circleEx
+        onebig = renamed [Replace "onebig"] $ Mirror $ OneBig (3 / 4) (3 / 4)
 
 myWorkspaces = map show [1 .. 12]
 
 myKeys =
-    [ ("M-S-<Return>", spawn "$HOME/.cargo/bin/alacritty")
-    , ("<Print>", spawn "$HOME/bin/foto")
-    , ("<XF86AudioRaiseVolume>", spawn "$HOME/.xmonad/scripts/set-volume.sh speakers +5")
-    , ("<XF86AudioLowerVolume>", spawn "$HOME/.xmonad/scripts/set-volume.sh speakers -5")
-    , ("S-<XF86AudioRaiseVolume>", spawn "$HOME/.xmonad/scripts/set-volume.sh speakers +1")
-    , ("S-<XF86AudioLowerVolume>", spawn "$HOME/.xmonad/scripts/set-volume.sh speakers -1")
-    , ("M-<XF86AudioRaiseVolume>", spawn "$HOME/.xmonad/scripts/set-volume.sh headphones +5")
-    , ("M-<XF86AudioLowerVolume>", spawn "$HOME/.xmonad/scripts/set-volume.sh headphones -5")
-    , ("M-S-<XF86AudioRaiseVolume>", spawn "$HOME/.xmonad/scripts/set-volume.sh headphones +1")
-    , ("M-S-<XF86AudioLowerVolume>", spawn "$HOME/.xmonad/scripts/set-volume.sh headphones -1")
-    , ("<XF86AudioMute>", spawn "$HOME/.xmonad/scripts/toggle-mute.sh speakers")
-    , ("M-<XF86AudioMute>", spawn "$HOME/.xmonad/scripts/toggle-mute.sh headphones")
+    [ ("<Print>", spawn "foto")
+    , ("<XF86AudioRaiseVolume>", spawn "set-volume speakers +5")
+    , ("<XF86AudioLowerVolume>", spawn "set-volume speakers -5")
+    , ("S-<XF86AudioRaiseVolume>", spawn "set-volume speakers +1")
+    , ("S-<XF86AudioLowerVolume>", spawn "set-volume speakers -1")
+    , ("M-<XF86AudioRaiseVolume>", spawn "set-volume headphones +5")
+    , ("M-<XF86AudioLowerVolume>", spawn "$set-volume headphones -5")
+    , ("M-S-<XF86AudioRaiseVolume>", spawn "set-volume headphones +1")
+    , ("M-S-<XF86AudioLowerVolume>", spawn "set-volume headphones -1")
+    , ("<XF86AudioMute>", spawn "toggle-mute speakers")
+    , ("M-<XF86AudioMute>", spawn "toggle-mute headphones")
     ]
         ++ [ (otherModMasks ++ "M-" ++ key, action tag)
            | (tag, key) <-
@@ -119,9 +133,10 @@ myKeys =
 myXmobarPP :: Int -> PP
 myXmobarPP n =
     def
-        { ppCurrent = current . wrap " " " "
-        , ppVisible = visible . wrap " " " "
-        , ppHidden = hidden . wrap " " " "
+        { ppCurrent = current . xmobarBorder "Top" (green myColorScheme) 2 . wrap " " " "
+        , ppVisible = visible . xmobarBorder "Top" (magenta myColorScheme) 2 . wrap " " " "
+        , ppHidden = hidden . xmobarBorder "Top" (magenta myColorScheme) 2 . wrap " " " "
+        , ppVisibleNoWindows = Just (visible . wrap " " " ")
         , ppHiddenNoWindows = hiddenNoWindows . wrap " " " "
         , ppUrgent = urgentRed . wrap (urgentYellow "!") (urgentYellow "!")
         , ppTitleSanitize = xmobarStrip
@@ -136,12 +151,12 @@ myXmobarPP n =
         formatFocused = xmobarColor (black myColorScheme) (cyan myColorScheme) . wrap "[" "]" . ppWindow
         formatUnfocused = hiddenNoWindows . wrap "[" "]" . ppWindow
         ppWindow :: String -> String
-        ppWindow = xmobarRaw . (\w -> if null w then "untitled" else w) . shorten 30
+        ppWindow = xmobarRaw . (\w -> if null w then "untitled" else w) . shorten 40
 
         urgentRed, urgentYellow, current, visible, hidden, hiddenNoWindows, wsSep :: String -> String
-        current = xmobarColor (black myColorScheme) (cyan myColorScheme) . xmobarBorder "Top" (magenta myColorScheme) 2
-        visible = xmobarColor (black myColorScheme) (blue myColorScheme) . xmobarBorder "Top" (magenta myColorScheme) 2
-        hidden = xmobarColor (cyan myColorScheme) (black myColorScheme) . xmobarBorder "Top" (magenta myColorScheme) 2
+        current = xmobarColor (black myColorScheme) (cyan myColorScheme)
+        visible = xmobarColor (black myColorScheme) (blue myColorScheme)
+        hidden = xmobarColor (cyan myColorScheme) (black myColorScheme)
         hiddenNoWindows = xmobarColor (blue myColorScheme) (black myColorScheme)
 
         wsSep = xmobarColor (black myColorScheme) (black myColorScheme)

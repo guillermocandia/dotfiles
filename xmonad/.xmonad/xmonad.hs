@@ -15,10 +15,13 @@ import Data.Maybe (Maybe (Just))
 import XMonad
     ( Default (def)
     , Full (Full)
+    , ManageHook
     , Mirror (Mirror)
     , ScreenId (S)
     , Tall (Tall)
-    , XConfig (borderWidth, focusFollowsMouse, focusedBorderColor, layoutHook, modMask, normalBorderColor, workspaces)
+    , XConfig (borderWidth, focusFollowsMouse, focusedBorderColor, layoutHook, manageHook, modMask, normalBorderColor, workspaces)
+    , className
+    , doFloat
     , mod4Mask
     , spawn
     , terminal
@@ -29,6 +32,7 @@ import XMonad
 import XMonad.Hooks.DynamicLog (xmobarBorder, xmobarColor)
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
 import XMonad.Hooks.ManageDocks (avoidStruts)
+import XMonad.Hooks.ManageHelpers (isDialog)
 import XMonad.Hooks.StatusBar
     ( defToggleStrutsKey
     , statusBarPropTo
@@ -59,11 +63,13 @@ import XMonad.Layout.Grid (Grid (Grid))
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.OneBig (OneBig (OneBig))
 import XMonad.Layout.Renamed (Rename (Replace), renamed)
+import XMonad.ManageHook (composeAll, (-->), (=?))
 import XMonad.Prelude (Bool (True))
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Loggers (logLayoutOnScreen, logTitlesOnScreen, xmobarColorL)
 
+main :: IO ()
 main =
     xmonad
         . ewmhFullscreen
@@ -85,6 +91,7 @@ myConfig =
         , workspaces = myWorkspaces
         , terminal = "alacritty"
         , layoutHook = myLayout
+        , manageHook = myManageHook
         , normalBorderColor = black myColorScheme
         , focusedBorderColor = cyan myColorScheme
         , borderWidth = 1
@@ -120,12 +127,13 @@ myKeys =
     , ("M-S-<XF86AudioLowerVolume>", spawn "set-volume headphones -1")
     , ("<XF86AudioMute>", spawn "toggle-mute speakers")
     , ("M-<XF86AudioMute>", spawn "toggle-mute headphones")
+    , ("M-f", spawn "firefox")
     ]
         ++ [ (otherModMasks ++ "M-" ++ key, action tag)
            | (tag, key) <-
                 zip myWorkspaces (map (\x -> "<F" ++ show x ++ ">") [1 .. 12])
            , (otherModMasks, action) <-
-                [ ("", windows . W.greedyView) -- or W.view
+                [ ("", windows . W.greedyView)
                 , ("S-", windows . W.shift)
                 ]
            ]
@@ -162,3 +170,10 @@ myXmobarPP n =
         wsSep = xmobarColor (black myColorScheme) (black myColorScheme)
         urgentYellow = xmobarColor (yellow myColorScheme) ""
         urgentRed = xmobarColor (red myColorScheme) ""
+
+myManageHook :: ManageHook
+myManageHook =
+    composeAll
+        [ className =? "dmengine" --> doFloat -- Defold
+        , isDialog --> doFloat
+        ]

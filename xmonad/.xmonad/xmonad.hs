@@ -124,7 +124,7 @@ myKeys =
     , ("S-<XF86AudioRaiseVolume>", spawn "set-volume speakers +1")
     , ("S-<XF86AudioLowerVolume>", spawn "set-volume speakers -1")
     , ("M-<XF86AudioRaiseVolume>", spawn "set-volume headphones +5")
-    , ("M-<XF86AudioLowerVolume>", spawn "$set-volume headphones -5")
+    , ("M-<XF86AudioLowerVolume>", spawn "set-volume headphones -5")
     , ("M-S-<XF86AudioRaiseVolume>", spawn "set-volume headphones +1")
     , ("M-S-<XF86AudioLowerVolume>", spawn "set-volume headphones -1")
     , ("<XF86AudioMute>", spawn "toggle-mute speakers")

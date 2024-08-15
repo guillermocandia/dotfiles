@@ -58,6 +58,7 @@ import XMonad.Hooks.StatusBar.PP
     , xmobarRaw
     , xmobarStrip
     )
+import XMonad.Hooks.UrgencyHook (NoUrgencyHook (NoUrgencyHook), withUrgencyHook)
 import XMonad.Layout.CircleEx (CircleEx (CircleEx, cDelta), circleEx)
 import XMonad.Layout.Grid (Grid (Grid))
 import XMonad.Layout.NoBorders (smartBorders)
@@ -75,6 +76,7 @@ main =
         . ewmhFullscreen
         . ewmh
         . withEasySB myStatusBar defToggleStrutsKey
+        . withUrgencyHook NoUrgencyHook
         $ myConfig
 
 myStatusBar = xmobar0 <> xmobar1 <> xmobar2

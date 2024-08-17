@@ -1,6 +1,6 @@
 module Monitors (multiCpu, memory, multiCoreTemp, date, locks, eno1, uptime, disku, gpu, diskio, top) where
 
-import ColorScheme (ColorScheme (red, green, yellow), myColorScheme)
+import ColorScheme (ColorScheme (green, red, yellow), myColorScheme)
 import Xmobar (Command (Com), Date (Date), Locks (Locks'), Monitors (DiskIO, DiskU, Memory, MultiCoreTemp, MultiCpu, Network, TopProc, Uptime))
 
 -- cpu and memory
@@ -110,8 +110,8 @@ top =
 locks :: Locks
 locks =
     Locks'
-        [ ("CAPS", ("<fc=" ++yellow myColorScheme ++ "><fn=1>\xf100d</fn>", "<fn=1>\xf002c</fn>"))
-        , ("NUM", ("<fc=" ++yellow myColorScheme ++ "><fn=1>\xf03a0</fn></fc>", "<fn=1>\xf19d3</fn>"))
+        [ ("CAPS", ("<fc=" ++ yellow myColorScheme ++ "><fn=1>\xf100d</fn></fc>", "<fn=1>\xf002c</fn>"))
+        , ("NUM", ("<fc=" ++ yellow myColorScheme ++ "><fn=1>\xf03a0</fn></fc>", "<fn=1>\xf19d3</fn>"))
         , ("SCROLL", ("SlOCK", ""))
         ]
 

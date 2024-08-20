@@ -25,6 +25,7 @@ import XMonad
     , mod4Mask
     , spawn
     , terminal
+    , title
     , windows
     , xmonad
     , (|||)
@@ -52,6 +53,7 @@ import XMonad.Hooks.StatusBar.PP
         , ppVisibleNoWindows
         , ppWsSep
         )
+    , filterOutWsPP
     , shorten
     , wrap
     , xmobarColor
@@ -64,11 +66,12 @@ import XMonad.Layout.Grid (Grid (Grid))
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.OneBig (OneBig (OneBig))
 import XMonad.Layout.Renamed (Rename (Replace), renamed)
-import XMonad.ManageHook (composeAll, (-->), (=?))
+import XMonad.ManageHook (composeAll, (-->), (<+>), (=?))
 import XMonad.Prelude (Bool (True))
 import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Loggers (logLayoutOnScreen, logTitlesOnScreen, xmobarColorL)
+import XMonad.Util.NamedScratchpad (NamedScratchpad (NS), customFloating, namedScratchpadAction, namedScratchpadManageHook, scratchpadWorkspaceTag)
 
 main :: IO ()
 main =
@@ -81,11 +84,13 @@ main =
 
 myStatusBar = xmobar0 <> xmobar1 <> xmobar2
 
-xmobar0 = statusBarPropTo "_XMONAD_LOG_1" "xmobar -x 0" $ pure (myXmobarPP 0)
+xmobar0 = statusBarPropTo "_XMONAD_LOG_1" "xmobar -x 0" $ pure . f $ myXmobarPP 0
 
-xmobar1 = statusBarPropTo "_XMONAD_LOG_2" "xmobar -x 1" $ pure (myXmobarPP 1)
+xmobar1 = statusBarPropTo "_XMONAD_LOG_2" "xmobar -x 1" $ pure . f $ myXmobarPP 1
 
-xmobar2 = statusBarPropTo "_XMONAD_LOG_3" "xmobar -x 2" $ pure (myXmobarPP 2)
+xmobar2 = statusBarPropTo "_XMONAD_LOG_3" "xmobar -x 2" $ pure . f $ myXmobarPP 2
+
+f = filterOutWsPP [scratchpadWorkspaceTag]
 
 myConfig =
     def
@@ -130,6 +135,8 @@ myKeys =
     , ("<XF86AudioMute>", spawn "toggle-mute speakers")
     , ("M-<XF86AudioMute>", spawn "toggle-mute headphones")
     , ("M-f", spawn "firefox")
+    , ("M-u", namedScratchpadAction myScratchpads "pulsemixer")
+    , ("M-o", namedScratchpadAction myScratchpads "obsidian")
     ]
         ++ [ (otherModMasks ++ "M-" ++ key, action tag)
            | (tag, key) <-
@@ -179,3 +186,12 @@ myManageHook =
         [ className =? "dmengine" --> doFloat -- Defold
         , isDialog --> doFloat
         ]
+        <+> namedScratchpadManageHook myScratchpads
+
+myScratchpads :: [NamedScratchpad]
+myScratchpads =
+    [ NS "pulsemixer" "alacritty --title=pulsemixer --command pulsemixer" (title =? "pulsemixer") cf
+    , NS "obsidian" "obsidian" (className =? "obsidian") cf
+    ]
+    where
+        cf = customFloating $ W.RationalRect (1 / 8) (1 / 8) (6 / 8) (6 / 8)

@@ -17,7 +17,7 @@ data ColorScheme where
         -> ColorScheme
 
 myColorScheme :: ColorScheme
-myColorScheme = _carbon
+myColorScheme = _oxocarbon
 
 _nord :: ColorScheme
 _nord =
@@ -56,4 +56,30 @@ _carbon =
         , magenta = "#be95ff"
         , cyan = "#33b1ff"
         , white = "#dfdfe0"
+        }
+
+_oxocarbon :: ColorScheme
+_oxocarbon =
+    ColorScheme
+        { black = "#262626"
+        , magenta = "#ff7eb6"
+        , green = "#42be65"
+        , yellow = "#ffe97b"
+        , blue = "#33b1ff"
+        , red = "#ee5396"
+        , cyan = "#3ddbd9"
+        , white = "#dde1e6"
+        }
+
+_xterm :: ColorScheme
+_xterm =
+    ColorScheme
+        { black = "#000000"
+        , red = "#cd0000"
+        , green = "#00cd00"
+        , yellow = "#cdcd00"
+        , blue = "#0000ee"
+        , magenta = "#cd00cd"
+        , cyan = "#00cdcd"
+        , white = "#e5e5e5"
         }

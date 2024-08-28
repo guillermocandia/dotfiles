@@ -4,17 +4,17 @@
 import ColorScheme
     ( ColorScheme
         ( black
-        -- , blue
-        , cyan
-        -- , green
-        , magenta
-        -- , red
-        -- , white
-        -- , yellow
+        , -- , blue
+          cyan
+        , -- , green
+          magenta
+          -- , red
+          -- , white
+          -- , yellow
         )
     , myColorScheme
     )
-import Customs (deb, headphones, speakers, spock)
+import Customs (deb, headphones, headphonesBattery, speakers, spock)
 import Monitors (date, diskio, disku, eno1, gpu, locks, memory, multiCoreTemp, multiCpu, top, uptime)
 import System.Environment (getArgs)
 import Xmobar
@@ -101,6 +101,7 @@ myCommands =
     , Run spock
     , Run deb
     , Run top
+    , Run headphonesBattery
     ]
 
 myTemplate :: Int -> String
@@ -120,7 +121,7 @@ right :: Int -> String
 -- right n = r !! n >>= \c -> if c == ' ' then separator else pure c
 right n =
     ( case n of
-        0 -> "%locks%-%uptime%-%speakers% %headphones%-%date% "
+        0 -> "%locks%-%uptime%-%speakers% %headphones% %headphonesBattery%-%date% "
         1 -> "%multicpu%-%multicoretemp%-%memory%-%date% "
         2 -> "%top%-%diskio%-%disku%-%eno1%-%deb%-%date% "
         _ -> ""

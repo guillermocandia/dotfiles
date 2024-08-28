@@ -13,6 +13,7 @@ library
   exposed-modules:
       Customs
       Customs.DebianUpdates
+      Customs.HeadphonesBattery
       Customs.ShowText
       Customs.Volume
       Monitors

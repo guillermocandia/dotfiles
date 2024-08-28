@@ -1,0 +1,15 @@
+#!/bin/bash
+
+battery=$(headsetcontrol --battery | tail -1 | cut --delimiter=" " --fields=2)
+battery=${battery//%/}
+
+regex_pattern='^-'
+
+if [[ $battery =~ $regex_pattern ]]; then
+	on=0
+	battery=0
+else
+	on=1
+fi
+
+echo -n "$on $battery"

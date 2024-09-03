@@ -1,0 +1,2 @@
+# https://bugs.gnucash.org/show_bug.cgi?id=798486
+alias gnucash="env WEBKIT_DISABLE_COMPOSITING_MODE=1 gnucash"

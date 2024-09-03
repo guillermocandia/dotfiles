@@ -40,4 +40,7 @@ alias xterm="xterm -vb"
 alias kubectl="kubecolor"
 alias ssh="env TERM=xterm-256color ssh"
 
+# https://bugs.gnucash.org/show_bug.cgi?id=798486
+alias gnucash="env WEBKIT_DISABLE_COMPOSITING_MODE=1 gnucash"
+
 export PATH=~/bin:~/.local/bin:~/.cargo/bin:~/.ghcup/bin/:$PATH

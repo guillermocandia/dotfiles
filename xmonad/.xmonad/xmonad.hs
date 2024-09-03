@@ -137,6 +137,7 @@ myKeys =
     , ("M-f", spawn "firefox")
     , ("M-u", namedScratchpadAction myScratchpads "pulsemixer")
     , ("M-o", namedScratchpadAction myScratchpads "obsidian")
+    , ("M-g", namedScratchpadAction myScratchpads "glances")
     ]
         ++ [ (otherModMasks ++ "M-" ++ key, action tag)
            | (tag, key) <-
@@ -192,6 +193,8 @@ myScratchpads :: [NamedScratchpad]
 myScratchpads =
     [ NS "pulsemixer" "alacritty --title=pulsemixer --command pulsemixer" (title =? "pulsemixer") cf
     , NS "obsidian" "obsidian" (className =? "obsidian") cf
+    , NS "glances" "alacritty --title=glances --command glances" (title =? "glances") gcf
     ]
     where
         cf = customFloating $ W.RationalRect (1 / 8) (1 / 8) (6 / 8) (6 / 8)
+        gcf = customFloating $ W.RationalRect (1 / 32) (1 / 32) (30 / 32) (30 / 32)

@@ -1,11 +1,11 @@
 resolver:
-  url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/22/31.yaml
+  url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/24/4.yaml
 
 packages:
 - .
 
 extra-deps:
-- xmobar-0.48.1
+- xmobar-0.50
 - ../../../haskell/mylib/
 
 flags:

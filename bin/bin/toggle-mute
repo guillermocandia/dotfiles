@@ -1,6 +1,6 @@
 #!/bin/bash
 
-speakers_name="Built-in Audio Analog Surround 2.1"
+speakers_name="Built-in Audio Analog"
 headphones_name="G733 Gaming Headset Analog Stereo"
 
 valid_devices=("speakers" "headphones")

@@ -43,3 +43,8 @@ alias ssh="env TERM=xterm-256color ssh"
 export PATH=~/bin:~/.local/bin:~/.cargo/bin:~/.ghcup/bin/:$PATH
 
 . ~/.alias
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/zink/.lmstudio/bin"
+# End of LM Studio CLI section
+

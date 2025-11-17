@@ -1,5 +1,5 @@
 #!/bin/bash
 
-updates=$(apt-get -q -y --ignore-hold --allow-change-held-packages --allow-unauthenticated -s dist-upgrade | grep ^Inst | wc -l)
+updates=$(apt list --upgradable 2>/dev/null | wc -l)
 
 echo -n $updates

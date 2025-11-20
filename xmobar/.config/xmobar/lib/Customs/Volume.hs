@@ -25,8 +25,8 @@ instance Exec Volume where
         where
             shellCommand = "pactl subscribe|grep --line-buffered \"sink #" ++ sink ++ "\""
             sink = case device of
-                "headphones" -> "1"
-                "speakers" -> "2"
+                "headphones" -> "0"
+                "speakers" -> "1"
                 _ -> undefined
 
 getVolume :: String -> IO String

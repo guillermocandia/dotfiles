@@ -13,8 +13,8 @@ packages:
     hackage: xmobar-0.50
 snapshots:
 - completed:
-    sha256: b96cc8b203559fdd1c1617ebd71e90ea04a2db0d71b416717a2a1d1539d5d5c9
-    size: 724735
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/24/4.yaml
+    sha256: 4b787f53036611a03edbf438dd5412daa03fb3da5d938ae8865ec471fe3f9632
+    size: 726335
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/24/21.yaml
   original:
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/24/4.yaml
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/24/21.yaml

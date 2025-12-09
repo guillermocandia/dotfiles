@@ -2,9 +2,9 @@ resolver:
   url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/24/21.yaml
 packages:
   - .
-  - xmonad-0.18.0
-  - xmonad-contrib-0.18.1
-  - X11-1.10.3
+  # - xmonad-0.18.0
+  # - xmonad-contrib-0.18.1
+  # - X11-1.10.3
 extra-deps:
   - ../../haskell/mylib/
-  - data-default-class-0.1.2.2@sha256:51400ed341ec87e86a4acf83301c6890e1fc67708e2d0ac519d48e0a14f54c15,1309
+  # - data-default-class-0.1.2.2@sha256:51400ed341ec87e86a4acf83301c6890e1fc67708e2d0ac519d48e0a14f54c15,1309

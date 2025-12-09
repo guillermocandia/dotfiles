@@ -52,9 +52,23 @@ return {
         },
       })
 
+      -- python
+      -- lspconfig.pylsp.setup({
+      --   on_attach = on_attach,
+      --   settings = {
+      --     pylsp ={
+      --       plugins = {
+      --         flake8 = {enabled = true},
+      --       }
+      --     }
+      --   }
+      -- })
+
+
       local servers = {
         "bashls", -- bash
-        "pylsp", -- python
+        -- "pylsp", -- python
+        "basedpyright",
         "marksman", -- markdown
         "yamlls", -- yaml
         "jsonls", -- json

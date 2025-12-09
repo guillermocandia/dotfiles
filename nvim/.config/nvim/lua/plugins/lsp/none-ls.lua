@@ -21,7 +21,7 @@ return {
         ensure_installed = {
           "luacheck", -- lua linter
           "stylua", -- lua formatter
-          "pylint", -- python linter
+          -- "pylint", -- python linter
           "black", -- python formatter
           "isort", -- python formatter
           "shfmt", -- bash formatter

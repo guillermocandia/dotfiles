@@ -1,5 +1,6 @@
 #!/bin/bash
 
 updates=$(apt list --upgradable 2>/dev/null | wc -l)
+updates=$((updates - 1))
 
 echo -n $updates

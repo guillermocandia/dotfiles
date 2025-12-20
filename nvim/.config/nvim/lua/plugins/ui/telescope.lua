@@ -1,10 +1,9 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
-    version = "0.1.x",
+    tag = "v0.2.0",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "stevearc/dressing.nvim",
     },
     config = function()
       require("telescope").setup({
@@ -25,7 +24,6 @@ return {
       vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Telescope keymaps" })
       vim.keymap.set("n", "<leader>fr", builtin.registers, { desc = "Telescope registers" })
       vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "Telescope oldfiles" })
-
     end,
   },
 
@@ -47,22 +45,6 @@ return {
     "ghassan0/telescope-glyph.nvim",
     config = function()
       require("telescope").load_extension("glyph")
-    end,
-  },
-
-  {
-    "ziontee113/icon-picker.nvim",
-    enabled = false,
-    config = function()
-      require("icon-picker").setup({ disable_legacy_commands = true })
-
-      vim.keymap.set(
-        "n",
-        "<leader>fp",
-        ":IconPickerYank<cr>",
-        { desc = "Icon picker yank", noremap = true, silent = true }
-      )
-      vim.keymap.set("i", "<C-i>", ":IconPickerInsert<cr>", { desc = "Icon picker", noremap = true, silent = true })
     end,
   },
 }

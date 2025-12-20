@@ -6,6 +6,6 @@ return {
   { import = "plugins/debugger" },
   { import = "plugins/editor" },
   { import = "plugins/utils" },
-  { import = "plugins/lang-specific" },
+  -- { import = "plugins/lang-specific" },
   { import = "plugins/dev" },
 }

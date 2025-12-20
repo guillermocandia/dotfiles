@@ -38,8 +38,10 @@ return {
     config = function()
       local todo = require("todo-comments")
       todo.setup()
-      vim.keymap.set("n", "<leader>tt", ":Trouble todo<cr>", { desc = "Trouble todo", silent = true })
+      vim.keymap.set("n", "<leader>tt", ":Trouble todo toggle<cr>", { desc = "Trouble todo", silent = true })
       vim.keymap.set("n", "<leader>ft", ":TodoTelescope<cr>", { desc = "Telescope todo", silent = true })
     end,
   },
 }
+
+-- TODO: revisit config from github, try to toogle

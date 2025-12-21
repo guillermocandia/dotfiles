@@ -43,5 +43,3 @@ return {
     end,
   },
 }
-
--- TODO: revisit config from github, try to toogle

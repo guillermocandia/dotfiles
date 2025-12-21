@@ -24,8 +24,6 @@ M.active_lsp = {
       end
     end
 
-    -- TODO: include otter conf
-
     return table.concat(buffer_client_names, "┆")
   end,
   icon = "󰌘",

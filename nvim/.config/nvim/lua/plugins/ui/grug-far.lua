@@ -19,7 +19,7 @@ return {
     end, { desc = "grug-far: Search visual selection in current file" })
 
     vim.keymap.set({ "v" }, "<leader>si", function()
-      require("grug-far").open({ visualSelectionUsage = "operate-within-range" })
+      require("grug-far").open({ visualSelectionUsage = "operate-within-range", transient = true })
     end, { desc = "grug-far: Search within range" })
   end,
 }

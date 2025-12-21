@@ -1,6 +1,7 @@
 return {
-  "folke/noice.nvim",
+  "folke/noice.nvim", -- TODO: look for a less intrusive replacement(cmdline, notifications)
   event = "VeryLazy",
+  enabled = true,
   opts = {},
   dependencies = {
     "MunifTanjim/nui.nvim",
@@ -17,6 +18,9 @@ return {
         },
         progress = {
           view = "mini",
+        },
+        signature = {
+          enabled = false,
         },
       },
       cmdline = {

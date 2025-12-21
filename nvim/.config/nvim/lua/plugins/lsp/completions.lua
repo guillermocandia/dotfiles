@@ -7,12 +7,12 @@ return {
       "mrcjkb/haskell-snippets.nvim",
     },
     build = "make install_jsregexp",
-    conig = function()
+    config = function()
       local luasnip = require("luasnip")
       luasnip.setup()
 
       require("luasnip.loaders.from_vscode").lazy_load()
-      -- require("luasnip").filetype_extend("python", { "django" }) TODO
+      require("luasnip").filetype_extend("python", { "django" })
 
       local haskell_snippets = require("haskell-snippets").all
       luasnip.add_snippets("haskell", haskell_snippets, { key = "haskell" })
@@ -26,6 +26,7 @@ return {
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
     },
     config = function()
       local cmp = require("cmp")
@@ -47,15 +48,6 @@ return {
           ["<C-e>"] = cmp.mapping.abort(),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         }),
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          -- { name = "nvim_lsp_signature_help" }, -- managed by noice
-          { name = "nvim_lsp_document_symbol" },
-        }, {
-          { name = "path" },
-          { name = "buffer" },
-        }),
         formatting = {
           expandable_indicator = true,
           fields = { "abbr", "kind", "menu" },
@@ -69,6 +61,32 @@ return {
             return vim_item
           end,
         },
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+          { name = "lazydev" },
+          { name = "nvim_lsp_signature_help" },
+          { name = "nvim_lsp_document_symbol" },
+        }, {
+          { name = "buffer" },
+          { name = "path" },
+        }),
+      })
+
+      cmp.setup.cmdline("/", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = "buffer" },
+        },
+      })
+
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" },
+        }, {
+          { name = "cmdline" },
+        }),
       })
     end,
   },

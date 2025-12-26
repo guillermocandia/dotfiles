@@ -10,6 +10,7 @@ local labels = {
   ["<leader>n"] = { name = "Noice" },
   ["<leader>e"] = { name = "ETC" },
   ["<leader>h"] = { name = "Haskell tools" },
+  ["<leader>o"] = { name = "Opencode" },
 }
 
 return labels

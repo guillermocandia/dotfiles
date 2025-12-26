@@ -1,0 +1,28 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "edit": "ask",
+    "bash": {
+      "*": "ask",
+      "pwd": "allow",
+      "ls": "allow"
+    },
+    "skill": "ask",
+    "webfetch": "ask",
+    "doom_loop": "ask",
+    "external_directory": "ask"
+  },
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "qwen2.5:7b": {},
+        "ministral-3:3b": {},
+        "mistral:7b-instruct": {}
+      }
+    }
+  }
+}

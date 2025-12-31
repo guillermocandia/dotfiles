@@ -22,6 +22,10 @@ vim.diagnostic.config({
   virtual_text = {
     virt_text_pos = "right_align",
     source = true,
+    format = function (diagnostic)
+      return string.format("%s", string.sub(diagnostic.message, 0, 60))
+    end
+
   },
   underline = false,
   update_in_insert = false,

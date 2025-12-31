@@ -21,7 +21,9 @@
       "models": {
         "qwen2.5:7b": {},
         "ministral-3:3b": {},
-        "mistral:7b-instruct": {}
+        "mistral:7b-instruct": {},
+        "deepseek-coder:6.7b": {},
+        "codegemma:7b-instruct": {}
       }
     }
   }

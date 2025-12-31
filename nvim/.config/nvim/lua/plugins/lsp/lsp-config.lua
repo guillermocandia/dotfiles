@@ -11,10 +11,11 @@ return {
       local lsp_servers = {
         "lua_ls", -- lua
         "bashls", -- bash
-        "basedpyright", -- python
+        "pyright", -- python
         "marksman", -- markdown
         "yamlls", -- yaml
         "jsonls", -- json
+        "tombi", -- toml
       }
 
       mason_lspconfig.setup({

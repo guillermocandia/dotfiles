@@ -1,9 +1,10 @@
+---@diagnostic disable: missing-fields
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
   lazy = false,
   config = function()
-    local configs = require("nvim-treesitter.configs")
+    local configs = require("nvim-treesitter.config")
     configs.setup({
       modules = {},
       ensure_installed = {},

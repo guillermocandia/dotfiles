@@ -1,10 +1,12 @@
 return {
+  -- {
+  --   "mrcjkb/haskell-snippets.nvim",
+  -- },
   {
     "L3MON4D3/LuaSnip",
     dependencies = {
       "saadparwaiz1/cmp_luasnip",
       "rafamadriz/friendly-snippets",
-      "mrcjkb/haskell-snippets.nvim",
     },
     build = "make install_jsregexp",
     config = function()
@@ -14,8 +16,8 @@ return {
       require("luasnip.loaders.from_vscode").lazy_load()
       require("luasnip").filetype_extend("python", { "django" })
 
-      local haskell_snippets = require("haskell-snippets").all
-      luasnip.add_snippets("haskell", haskell_snippets, { key = "haskell" })
+      -- local haskell_snippets = require("haskell-snippets").all
+      -- luasnip.add_snippets("haskell", haskell_snippets, { key = "haskell" })
     end,
   },
   {

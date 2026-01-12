@@ -11,11 +11,12 @@ return {
       local lsp_servers = {
         "lua_ls", -- lua
         "bashls", -- bash
-        "pyright", -- python
+        -- "pyright", -- python
         "marksman", -- markdown
         "yamlls", -- yaml
         "jsonls", -- json
         "tombi", -- toml
+        "ruff", -- python
       }
 
       mason_lspconfig.setup({
@@ -65,10 +66,10 @@ return {
         ensure_installed = {
           "luacheck", -- lua linter
           "stylua", -- lua formatter
-          "black", -- python formatter
-          "isort", -- python formatter
+          -- "black", -- python formatter
+          -- "isort", -- python formatter
           "shfmt", -- bash formatter
-          "markdownlint", -- markdown linter, formatter
+          "markdownlint-cli2", -- markdown linter, formatter
           "yamlfmt", -- yaml formatter
         },
         automatic_installation = true,

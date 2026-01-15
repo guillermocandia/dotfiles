@@ -6,10 +6,10 @@ battery=${battery//%/}
 regex_pattern='^-'
 
 if [[ $battery =~ $regex_pattern ]]; then
-	on=0
-	battery=0
+    on=0
+    battery=0
 else
-	on=1
+    on=1
 fi
 
 echo -n "$on $battery"

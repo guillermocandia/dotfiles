@@ -3,7 +3,7 @@ import = ["~/.config/alacritty/xterm.toml"]
 
 [window]
 title = "x"
-decorations = "None"
+decorations = "none"
 
 [font]
 normal = { family = "Inconsolata Nerd Font Mono", style = "Bold" }

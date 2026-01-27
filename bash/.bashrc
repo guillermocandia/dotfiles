@@ -24,6 +24,9 @@ fi
 if [ -f ~/.kube/completion.bash.inc ]; then
   . ~/.kube/completion.bash.inc
 fi
+if [ -f ~/.completions/opencode ]; then
+  . ~/.completions/opencode
+fi
 
 git_branch() {
   if [ -d .git ]; then
@@ -49,3 +52,6 @@ export PATH="$PATH:/home/zink/.lmstudio/bin"
 
 # opencode
 export PATH="$PATH:/home/zink/.opencode/bin"
+
+# podman-compose
+export PODMAN_COMPOSE_PROVIDER="podman-compose"

@@ -71,6 +71,7 @@ return {
           "shfmt", -- bash formatter
           "markdownlint-cli2", -- markdown linter, formatter
           "yamlfmt", -- yaml formatter
+          "hadolint", -- ContainerFile linter
         },
         automatic_installation = true,
         handlers = {},

@@ -3,4 +3,7 @@ vim.filetype.add({
     [".*/%.xsessionrc"] = "sh",
     [".*/%.xsession"] = "sh",
   },
+  filename = {
+    ["ContainerFile"] = "dockerfile"
+  }  
 })

@@ -17,6 +17,7 @@ return {
         "jsonls", -- json
         "tombi", -- toml
         "ruff", -- python
+        "pylsp", -- python
       }
 
       mason_lspconfig.setup({

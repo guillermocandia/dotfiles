@@ -23,7 +23,9 @@
         "ministral-3:3b": {},
         "mistral:7b-instruct": {},
         "deepseek-coder:6.7b": {},
-        "codegemma:7b-instruct": {}
+        "codegemma:7b-instruct": {},
+        "kimi-k2.5:cloud": {},
+        "minimax-m2.1:cloud": {}
       }
     }
   }

@@ -48,10 +48,10 @@ export PATH=~/bin:~/.local/bin:~/.cargo/bin:~/.ghcup/bin/:$PATH
 . ~/.alias
 
 # LM Studio CLI
-export PATH="$PATH:/home/zink/.lmstudio/bin"
+export PATH="$PATH:$HOME/.lmstudio/bin"
 
 # opencode
-export PATH="$PATH:/home/zink/.opencode/bin"
+export PATH="$PATH:$HOME/.opencode/bin"
 
 # podman-compose
 export PODMAN_COMPOSE_PROVIDER="podman-compose"

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+echo "Stopping all running containers..."
+docker stop $(docker ps -aq) 2>/dev/null
+
+echo "Removing all containers..."
+docker rm $(docker ps -aq) 2>/dev/null
+
+echo "Removing all images..."
+docker rmi $(docker images -q) 2>/dev/null
+
+echo "Removing all volumes..."
+docker volume prune -f
+
+echo "Removing all networks (except default bridge, host, none)..."
+docker network prune -f
+
+echo "Removing all build caches..."
+docker builder prune -f
+
+echo "Cleaning up dangling resources..."
+docker system prune -af --volumes
+
+echo "Done! All Docker resources have been purged."
+docker system df

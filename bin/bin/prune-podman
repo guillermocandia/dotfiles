@@ -1,0 +1,9 @@
+#!/bin/bash
+
+podman stop -a 2>/dev/null
+podman rm -a 2>/dev/null
+podman rmi -a 2>/dev/null
+podman volume prune -f
+podman network prune -f
+podman system prune -af --volumes
+podman system df

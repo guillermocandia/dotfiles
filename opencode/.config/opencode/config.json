@@ -28,5 +28,20 @@
         "minimax-m2.1:cloud": {}
       }
     }
+  },
+  "mcp": {
+    "MiniMax": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "minimax-coding-plan-mcp",
+        "-y"
+      ],
+      "environment": {
+        "MINIMAX_API_KEY": "{file:minimax.key}",
+        "MINIMAX_API_HOST": "https://api.minimax.io"
+      },
+      "enabled": true
+    }
   }
 }

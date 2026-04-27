@@ -42,6 +42,18 @@
         "MINIMAX_API_HOST": "https://api.minimax.io"
       },
       "enabled": true
+    },
+    "github": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "environment": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "{file:github.key}"
+      },
+      "enabled": true
     }
   }
 }

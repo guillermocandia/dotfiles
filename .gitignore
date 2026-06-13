@@ -10,3 +10,4 @@ xmobar-0.48.1
 X11-1.10.3
 
 *.key
+.playwright-mcp

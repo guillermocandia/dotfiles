@@ -5,7 +5,15 @@
     "bash": {
       "*": "ask",
       "pwd": "allow",
-      "ls": "allow"
+      "ls *": "allow",
+      "git checkout *": "allow",
+      "git status *": "allow",
+      "cat *": "allow",
+      "head *": "allow",
+      "tail *": "allow",
+      "grep *": "allow",
+      "find *": "allow",
+      "jq *": "allow"
     },
     "skill": "ask",
     "webfetch": "ask",
@@ -59,6 +67,13 @@
       "type": "remote",
       "url": "https://mcp.shortcut.com/mcp",
       "enabled": true
+    },
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx",
+        "@playwright/mcp@latest"
+      ]
     }
   }
 }

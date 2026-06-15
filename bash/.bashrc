@@ -30,7 +30,8 @@ fi
 
 git_branch() {
   if [ -d .git ]; then
-    echo "($(git branch | cut -d " " -f 2)) "
+    branch=$(git branch --show-current)
+    echo "($branch) "
   fi
 }
 
